@@ -1,9 +1,13 @@
+package game;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-class Tower extends GameObject 
+import ui.*;
+import main.GameClient;
+
+public class Tower extends GameObject 
 {
 	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();//这个不能放到父类中
 	
@@ -16,7 +20,7 @@ class Tower extends GameObject
 		obj_imgs.put("T1", imgs[0]);
 	}
 
-	Tower(int x, int y, GameClient gc) {
+	public Tower(int x, int y, GameClient gc) {
 		super(x, y, gc);
 		obj_w=150;
 		obj_h=150;

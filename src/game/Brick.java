@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -5,7 +6,10 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
-class Brick extends GameObject 
+import ui.*;
+import main.GameClient;
+
+public class Brick extends GameObject 
 {
 
 	protected int b_w,b_h;
@@ -22,7 +26,7 @@ class Brick extends GameObject
 		obj_imgs.put("B2", imgs[1]);
 
 	}
-	Brick(int x, int y, int b_w, int b_h,String name,GameClient gc) 
+	public Brick(int x, int y, int b_w, int b_h,String name,GameClient gc) 
 	{
 		super(x, y, gc);
 		this.b_w=b_w;

@@ -1,10 +1,14 @@
+package ui;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
 
-class BackGround 
+import main.GameClient;
+import game.Hero;
+
+public class BackGround 
 {
 	public boolean available = true;
 	protected static Toolkit tk = Toolkit.getDefaultToolkit();

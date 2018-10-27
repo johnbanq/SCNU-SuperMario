@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -5,7 +6,12 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
 
-class GameObject 
+import game.Action;
+import game.Hero;
+import ui.*;
+import main.GameClient;
+
+public class GameObject 
 {
 	public int x,y,in_x;
 	public int obj_w=28, obj_h=28;

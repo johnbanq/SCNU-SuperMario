@@ -1,3 +1,4 @@
+package ui;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +8,7 @@ import java.io.InputStream;
 import sun.audio.*; 
 
 
-class GameAudio 
+public class GameAudio 
 {
 	protected String name;
 	protected InputStream in ;
@@ -15,7 +16,7 @@ class GameAudio
 	protected ContinuousAudioDataStream cas ;
 	protected AudioData data=null;
 	
-	GameAudio(String name)
+	public GameAudio(String name)
 	{
 		this.name=name;
 		try {

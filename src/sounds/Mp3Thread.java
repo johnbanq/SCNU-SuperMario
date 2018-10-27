@@ -1,15 +1,14 @@
 package sounds;
+import assets.MusicName;
 import javazoom.jl.decoder.JavaLayerException;
 
 public class Mp3Thread implements Runnable{
 	
-	private String music_name;//the music name which is playing
 	private GameMp3Player music_player;
 	
-	Mp3Thread(String music_name){
+	public Mp3Thread(MusicName name){
 		//starts with the music name to play
-		this.music_name=music_name;
-		music_player = new GameMp3Player(music_name);
+		music_player = new GameMp3Player(name);
 	}
 	
 	public void run(){
@@ -18,14 +17,13 @@ public class Mp3Thread implements Runnable{
 		}
 	}
 	
-	public String getMusicName() {
-		return music_name;
+	public MusicName getMusicName() {
+		return music_player.getMusicName();
 	}
 	
-	public void changeMusic(String name)
+	public void changeMusic(MusicName name)
 	{
-		music_name = name;
-		music_player.setName(name);
+		music_player.changeMusicAndPlay(name);
 	}
 	
 }

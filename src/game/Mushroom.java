@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -5,7 +6,10 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
-class Mushroom extends GameCreature
+import ui.*;
+import main.GameClient;
+
+public class Mushroom extends GameCreature
 {
 	
 	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();

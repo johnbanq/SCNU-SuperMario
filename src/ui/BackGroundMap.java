@@ -1,16 +1,18 @@
+package ui;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 
+import main.GameClient;
 
-class BackGroundMap 
+public class BackGroundMap 
 {
 	protected int num = 0;
 	protected GameClient gc = null;
 	public List<BackGround> objs = new LinkedList<BackGround>();
 	protected boolean initialize = false;
 	
-	BackGroundMap(int num,GameClient gc)
+	public BackGroundMap(int num,GameClient gc)
 	{
 		this.num=num;
 		this.gc=gc;

@@ -1,10 +1,14 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-class Tortoise extends GameCreature 
+import ui.*;
+import main.GameClient;
+
+public class Tortoise extends GameCreature 
 {
 	
 	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();//这个不能放到父类中
@@ -36,7 +40,7 @@ class Tortoise extends GameCreature
 		obj_imgs.put("RT2", imgs[7]);
 	}
 
-	Tortoise(int x, int y,Dirction move_dir, GameClient gc) 
+	public Tortoise(int x, int y,Dirction move_dir, GameClient gc) 
 	{
 		super(x, y, gc);
 		if(move_dir==Dirction.L) xspe=-XSPE;

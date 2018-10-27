@@ -1,9 +1,14 @@
+package game;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.List;
 
+import game.Hero;
+import ui.*;
+import main.GameClient;
 
-class GameCreature extends GameObject
+
+public class GameCreature extends GameObject
 {
 	protected int XSPE=10,YSPE=10;
 	protected int xspe,yspe,xadd,yadd=3;

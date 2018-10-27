@@ -1,8 +1,12 @@
+package game;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-class Mario1 extends Hero 
+import ui.*;
+import main.GameClient;
+
+public class Mario extends Hero 
 {
 
 	protected int shero_w=25,shero_h=25,w1=0,h1=0; 
@@ -16,34 +20,34 @@ class Mario1 extends Hero
 	{
 		imgs = new Image[]
 		{
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_L_jump1.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_L_jump2.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_L_run1.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_L_run2.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_L_run0.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_R_jump1.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_R_jump2.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_R_run1.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_R_run2.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_R_run0.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_stop_R.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/mario_stop_L.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_L_jump1.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_L_jump2.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_L_run1.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_L_run2.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_L_run0.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_R_jump1.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_R_jump2.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_R_run1.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_R_run2.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_R_run0.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_stop_R.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/mario_stop_L.png")),
 			//–°¬Ì¿Ô∞¬Õº∆¨º”‘ÿ
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_jump1_L.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_jump2_L.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_run1_L.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_run2_L.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_stand_L.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_stop_L.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_jump1_R.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_jump2_R.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_run1_R.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_run2_R.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_stand_R.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_stop_R.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_jump1_L.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_jump2_L.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_run1_L.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_run2_L.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_stand_L.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_stop_L.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_jump1_R.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_jump2_R.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_run1_R.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_run2_R.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_stand_R.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_stop_R.png")),
 			//À¿ÕˆÕº∆¨º”‘ÿ
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/b_mario_die.png")),
-			tk.getImage(Mario1.class.getClassLoader().getResource("Img/s_mario_die.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/b_mario_die.png")),
+			tk.getImage(Mario.class.getClassLoader().getResource("Img/s_mario_die.png")),
 		};
 		hero_img.put("LJ1", imgs[0]);
 		hero_img.put("LJ2", imgs[1]);
@@ -74,7 +78,7 @@ class Mario1 extends Hero
 		hero_img.put("BD", imgs[24]);
 		hero_img.put("SD", imgs[25]);
 	}
-	public Mario1(int x, int y,GameClient gc) {
+	public Mario(int x, int y,GameClient gc) {
 		super(x, y,gc);
 		w1=hero_w;
 		h1=hero_h;

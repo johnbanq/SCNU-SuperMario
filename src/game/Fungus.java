@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -6,8 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ui.*;
+import main.GameClient;
 
-class Fungus extends GameCreature 
+
+public class Fungus extends GameCreature 
 {
 
 
@@ -30,7 +34,7 @@ class Fungus extends GameCreature
 		obj_imgs.put("FS3", imgs[2]);
 	}
 	
-	Fungus(int x, int y,Dirction move_dir,GameClient gc) {
+	public Fungus(int x, int y,Dirction move_dir,GameClient gc) {
 		super(x, y, gc);
 		if(move_dir==Dirction.L) xspe=-XSPE;
 		else xspe=XSPE;

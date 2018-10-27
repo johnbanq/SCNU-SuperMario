@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -5,8 +6,11 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
+import ui.*;
+import main.GameClient;
 
-class Pipe extends GameObject 
+
+public class Pipe extends GameObject 
 {
 	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();
 	protected int p_h=0,obj_w=28,obj_h=28;
@@ -28,7 +32,7 @@ class Pipe extends GameObject
 
 	}
 	
-	Pipe(int x, int y,int p_h, GameClient gc) {
+	public Pipe(int x, int y,int p_h, GameClient gc) {
 		super(x, y, gc);
 		this.p_h=p_h;
 		all_w=obj_w*2;

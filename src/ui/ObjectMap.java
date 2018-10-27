@@ -1,15 +1,19 @@
+package ui;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 
-class ObjectMap 
+import game.*;
+import main.GameClient;
+
+public class ObjectMap 
 {
 	protected int num = 0;
 	protected GameClient gc = null;
 	public List<GameObject> objs = new LinkedList<GameObject>();
 	protected Hero player;
 	
-	ObjectMap(int num,GameClient gc)
+	public ObjectMap(int num,GameClient gc)
 	{
 		this.gc=gc;
 		this.num=num;

@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -7,15 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ui.*;
+import main.GameClient;
 
-class Hero 
+
+public class Hero 
 {
 	protected static final int XSPE=12,YSPE=27;
 	public int spe_add=2,xspe=0,yspe=0,spe1=0,rub_add=1,g_add=3,y_add=17,j_time=0,j_lim=2,die_t=0;
 	public int hero_w=25,hero_h=40;
 	public int x,y,x1,y1,x2,y2,hasrun_x=0;
 	public final static int LIM_X1=0,LIM_X2=550;
-	protected boolean march,can_j=true,finish=false;
+	public boolean march,can_j=true,finish=false;
 	protected boolean b_l,b_u,b_r,b_d;
 	public boolean live = true;
 	public Action act = Action.UNSTAND;

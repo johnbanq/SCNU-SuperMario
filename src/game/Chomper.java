@@ -1,11 +1,15 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
+import ui.*;
+import main.GameClient;
 
-class Chomper extends GameCreature 
+
+public class Chomper extends GameCreature 
 {
 
 	protected int d_time=0;
@@ -34,7 +38,7 @@ class Chomper extends GameCreature
 		obj_imgs.put("F6", imgs[5]);
 	}
 	
-	Chomper(int x,int y,String ground ,GameClient gc)
+	public Chomper(int x,int y,String ground ,GameClient gc)
 	{
 		super(x,y,gc);
 		this.ground=ground;

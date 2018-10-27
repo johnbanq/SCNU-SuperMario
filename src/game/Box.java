@@ -1,10 +1,14 @@
+package game;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
+import ui.*;
+import main.GameClient;
 
-class Box extends GameObject 
+
+public class Box extends GameObject 
 {
 
 	protected static final int Y_SPE=10,G_ADD=3;
@@ -28,7 +32,7 @@ class Box extends GameObject
 		obj_imgs.put("B4", imgs[3]);
 	}
 
-	Box(int x, int y, GameClient gc) {
+	public Box(int x, int y, GameClient gc) {
 		super(x, y, gc);
 		in_y=y;
 		obj_w=30;

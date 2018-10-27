@@ -1,12 +1,16 @@
+package ui;
 import java.awt.Graphics;
 
+import game.Tower;
+import main.GameClient;
 
-class ImageMap extends ObjectMap
+
+public class ImageMap extends ObjectMap
 {
 
 
 
-	ImageMap(int num, GameClient gc) {
+	public ImageMap(int num, GameClient gc) {
 		super(num, gc);
 	}
 

@@ -1,3 +1,5 @@
+package main;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -11,23 +13,36 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import game.*;
+import ui.*;
 
 public class GameClient extends JFrame //JFrame重画不调用update 方法 双缓冲代码要写到paint中
 {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static int F_W=800,F_H=600;
 	protected Image offscreen = null;
-	protected boolean d_menu=true,d_game=false,initialize=false;
+	public boolean d_menu=true;
+	public boolean d_game=false;
+	protected boolean initialize=false;
 	
 	Thread paint_thread=null;
-	Hero player1 = new Mario1(100,100,this);
+	public Mario player1 = new Mario(100,100,this);
 	BackGroundMap bgmap = new BackGroundMap(1,this);
-	ObjectMap obj_map = new ObjectMap(1,this);
-	ImageMap img_map = new ImageMap(1,this);
+	public ObjectMap obj_map = new ObjectMap(1,this);
+	public ImageMap img_map = new ImageMap(1,this);
 	Menu menu = new Menu(this);
-	JButton b_start=null,b_exit=null,b_restart=null;
-	JLabel label_t1=null,label_bg=null,label_gameover=null,label_win=null;
+	public JButton b_start=null;
+	public JButton b_exit=null;
+	public JButton b_restart=null;
+	public JLabel label_t1=null;
+	public JLabel label_bg=null;
+	public JLabel label_gameover=null;
+	public JLabel label_win=null;
 	Graphics offscreen_g=null;
 	
 	GameClient()

@@ -1,3 +1,4 @@
+package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -5,7 +6,10 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
-class Grass extends GameObject 
+import ui.*;
+import main.GameClient;
+
+public class Grass extends GameObject 
 {
 
 	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();
@@ -40,7 +44,7 @@ class Grass extends GameObject
 		obj_imgs.put("GS3", imgs[10]);
 	}
 	
-	Grass(int x, int y,int g_w,int g_h , GameClient gc) 
+	public Grass(int x, int y,int g_w,int g_h , GameClient gc) 
 	{
 		super(x,y,gc);
 		this.g_w=g_w;

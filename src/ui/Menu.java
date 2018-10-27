@@ -1,3 +1,4 @@
+package ui;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -12,10 +13,12 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import assets.MusicName;
+import main.GameClient;
 import sounds.Mp3Thread;
 
 
-class Menu 
+public class Menu 
 {
 	protected GameClient gc;
 	protected boolean initialize=false;
@@ -37,7 +40,7 @@ class Menu
 		obj_imgs.put("T1", imgs[0]);
 	}
 	
-	Menu(GameClient gc)
+	public Menu(GameClient gc)
 	{
 		this.gc=gc;
 		
@@ -69,7 +72,7 @@ class Menu
 				//≤Àµ•±≥æ∞“Ù¿÷ø™ º
 				if(mp3thread1.isAlive()==false)
 				{
-					mp3thread1 = new Thread(new Mp3Thread("√∞œ’µ∫1"));
+					mp3thread1 = new Thread(new Mp3Thread(MusicName.√∞œ’µ∫1));
 					mp3thread1.start();
 					System.out.println("–¬Ω®¡À“ª∏ˆ Mp3thread1");
 				}
@@ -179,8 +182,8 @@ class Menu
 			initialize=true;
 			
 			//±≥æ∞“Ù¿÷≤•∑≈
-			mp3thread1 = new Thread(new Mp3Thread("√∞œ’µ∫1"));
-			mp3thread2 = new Thread(new Mp3Thread("√∞œ’µ∫2"));
+			mp3thread1 = new Thread(new Mp3Thread(MusicName.√∞œ’µ∫1));
+			mp3thread2 = new Thread(new Mp3Thread(MusicName.√∞œ’µ∫2));
 			
 			mp3thread1.start();
 			
@@ -205,8 +208,6 @@ class Menu
 			{
 				//≤Àµ•±≥æ∞“Ù¿÷Õ£÷π≤•∑≈
 					mp3thread1.stop();
-					
-				
 				//”Œœ∑±≥æ∞“Ù¿÷ø™ º≤•∑≈
 					mp3thread2.start();
 				
@@ -234,7 +235,7 @@ class Menu
 				mp3thread1.stop();
 				if(mp3thread2.isAlive()==false)
 				{
-					mp3thread2 = new Thread(new Mp3Thread("√∞œ’µ∫2"));
+					mp3thread2 = new Thread(new Mp3Thread(MusicName.√∞œ’µ∫2));
 					mp3thread2.start();
 				}
 			}

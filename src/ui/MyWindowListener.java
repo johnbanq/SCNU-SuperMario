@@ -1,8 +1,9 @@
+package ui;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 
-class MyWindowListener implements WindowListener 
+public class MyWindowListener implements WindowListener 
 {
 
 	public void windowOpened(WindowEvent e) {
