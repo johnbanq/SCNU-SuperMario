@@ -45,8 +45,8 @@ public class Brick extends GameObject
 		Image img = null;
 		Color c = g.getColor();
 		g.setColor(Color.black);
-		g.fillOval(x,y,5,5);
-		g.fillOval(x+obj_w*b_w,y,5,5);
+		g.fillOval(getPosX(),getPosY(),5,5);
+		g.fillOval(getPosX()+obj_w*b_w,getPosY(),5,5);
 		g.setColor(c);
 		
 		for(int w = 1;w<=b_w;w++)
@@ -54,13 +54,13 @@ public class Brick extends GameObject
 			for(int h = 1; h<=b_h;h++)
 			{
 				img=obj_imgs.get(name);
-				g.drawImage(img,x+(w-1)*obj_w,y+(h-1)*obj_h,null);
+				g.drawImage(img,getPosX()+(w-1)*obj_w,getPosY()+(h-1)*obj_h,null);
 			}
 		}
 	}
-	public Rectangle getRectangle()
+	public Rectangle getTotalRectangle()
 	{
-		return new Rectangle(x,y,obj_w*b_w,obj_h*b_h);
+		return new Rectangle(getPosX(),getPosY(),obj_w*b_w,obj_h*b_h);
 	}
 
 }

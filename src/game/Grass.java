@@ -59,8 +59,8 @@ public class Grass extends GameObject
 		Image img = null;
 		Color c = g.getColor();
 		g.setColor(Color.black);
-		g.fillOval(x,y,5,5);
-		g.fillOval(x+obj_w*g_w,y,5,5);
+		g.fillOval(getPosX(),getPosY(),5,5);
+		g.fillOval(getPosX()+obj_w*g_w,getPosY(),5,5);
 		g.setColor(c);
 		
 		for(int w = 1;w<=g_w;w++)
@@ -93,7 +93,7 @@ public class Grass extends GameObject
 				{
 						img=obj_imgs.get("GS");
 				}
-				g.drawImage(img,x+(w-1)*obj_w,y+(h-1)*obj_h,null);
+				g.drawImage(img,getPosX()+(w-1)*obj_w,getPosY()+(h-1)*obj_h,null);
 			}
 		}
 	}
@@ -102,9 +102,9 @@ public class Grass extends GameObject
 		super.move();
 	}
 
-	public Rectangle getRectangle()
+	public Rectangle getTotalRectangle()
 	{
-		return new Rectangle(x,y,obj_w*g_w,obj_h*g_h);
+		return new Rectangle(getPosX(),getPosY(),obj_w*g_w,obj_h*g_h);
 	}
 	protected void touchingHero(Hero hero) {
 		

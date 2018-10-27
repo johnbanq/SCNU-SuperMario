@@ -15,7 +15,7 @@ import main.GameClient;
 public class Hero 
 {
 	protected static final int XSPE=12,YSPE=27;
-	public int spe_add=2,xspe=0,yspe=0,spe1=0,rub_add=1,g_add=3,y_add=17,j_time=0,j_lim=2,die_t=0;
+	public int spe_add=2,speed_x=0,speed_y=0,spe1=0,rub_add=1,g_add=3,y_add=17,j_time=0,j_lim=2,die_t=0;
 	public int hero_w=25,hero_h=40;
 	public int x,y,x1,y1,x2,y2,hasrun_x=0;
 	public final static int LIM_X1=0,LIM_X2=550;
@@ -59,9 +59,9 @@ public class Hero
 	
 	private void setHasrun() 
 	{
-		if(x+xspe>=LIM_X2)
+		if(x+speed_x>=LIM_X2)
 		{
-		hasrun_x+=xspe;
+		hasrun_x+=speed_x;
 		}
 	}
 
@@ -99,8 +99,8 @@ public class Hero
 			finish=false;
 			x=50;
 			y=100;
-			xspe=0;
-			yspe=0;
+			speed_x=0;
+			speed_y=0;
 			die_t=0;
 		}
 	}
@@ -114,9 +114,9 @@ public class Hero
 
 	protected void setDir()
 	{
-		if(xspe>0) move_dir=Dirction.R;
-		if(xspe<0) move_dir=Dirction.L;
-		if(xspe==0) move_dir=Dirction.STOP;
+		if(speed_x>0) move_dir=Dirction.R;
+		if(speed_x<0) move_dir=Dirction.L;
+		if(speed_x==0) move_dir=Dirction.STOP;
 	}
 	
 	protected void setMarch()
@@ -158,7 +158,7 @@ public class Hero
 	{
 		if(live==false||finish==true) return 0;
 		int rub = 0;
-		if(xspe!=0) 
+		if(speed_x!=0) 
 		{
 			if(move_dir==Dirction.R) rub=(-rub_add);
 			else if(move_dir==Dirction.L) rub=(rub_add);
@@ -174,17 +174,17 @@ public class Hero
 	{
 		if(can_j&&act==Action.STAND)
 		{
-			yspe-=y_add*1.3;
+			speed_y-=y_add*1.3;
 			b_u=false;
 		}
 		else if(can_j==true&&act==Action.UNSTAND)
 		{	
-			yspe=-y_add*1;
+			speed_y=-y_add*1;
 			b_u=false;
 		}
-		if(yspe<=-YSPE)
+		if(speed_y<=-YSPE)
 		{
-			yspe=-YSPE;
+			speed_y=-YSPE;
 			can_j=false;
 		}
 		j_time++;
@@ -207,8 +207,8 @@ public class Hero
 		}
 		if(x>gc.F_W&&finish==true)
 		{
-			xspe=0;
-			yspe=0;
+			speed_x=0;
+			speed_y=0;
 			live=false;
 			gc.d_game=false;
 			gc.d_menu=true;
@@ -222,8 +222,8 @@ public class Hero
 		die_t++;
 		act=Action.UNSTAND;
 		touch=Action.UNTOUCH;		
-		xspe=0;
-		yspe=-YSPE;
+		speed_x=0;
+		speed_y=-YSPE;
 		hasrun_x=0;
 		System.out.println("die");
 		
@@ -236,7 +236,7 @@ public class Hero
 		if(finish==false)
 		{
 			finish=true;
-			xspe=XSPE;
+			speed_x=XSPE;
 			
 			//过关音效
 			new GameAudio("庆祝").start();
@@ -249,15 +249,15 @@ public class Hero
 			jump();
 			b_u=false;
 		}
-		else if (act==Action.STAND&&yspe>0)
+		else if (act==Action.STAND&&speed_y>0)
 		{
 			can_j=true;
 			j_time=0;
-			yspe=1;
+			speed_y=1;
 		}
 		else if (act==Action.UNSTAND)
 		{
-			yspe+=g_add;
+			speed_y+=g_add;
 		}
 		int g_add1=g_add;
 		if(touch==Action.UNTOUCH)
@@ -266,20 +266,20 @@ public class Hero
 		}
 		else if(touch==Action.LTOUCH)
 		{
-			yspe=0;
+			speed_y=0;
 			//g_add=0;
 		}
 		else if(touch==Action.RTOUCH)
 		{
-			yspe=0;
+			speed_y=0;
 			//g_add=0;
 		}
 		else if(touch==Action.BUNT)
 		{
-			yspe=0;
+			speed_y=0;
 		}
 		
-		y+=yspe;
+		y+=speed_y;
 	}
 
 
@@ -303,7 +303,7 @@ public class Hero
 			b_l=false;
 			if(b_l==false)
 			{
-				xspe=0;
+				speed_x=0;
 			}
 		}
 		else if(touch==Action.RTOUCH)
@@ -314,24 +314,24 @@ public class Hero
 			b_r=false;
 			if(b_r==false)
 			{
-				xspe=0;
+				speed_x=0;
 			}
 		}
 		if(-XSPE<spe1&&spe1<XSPE)
 		{
-			xspe=spe1;
+			speed_x=spe1;
 		}
 		else
 		{
-			spe1=xspe;
+			spe1=speed_x;
 		}
-		if((x+xspe>LIM_X2||x+xspe<LIM_X1)&&finish==false)//未到终点且越过边界时
+		if((x+speed_x>LIM_X2||x+speed_x<LIM_X1)&&finish==false)//未到终点且越过边界时
 		{
 			x=x1;
 		}
 		else
 		{
-			x+=xspe;
+			x+=speed_x;
 			x1=x;
 		}
 	}
@@ -346,7 +346,7 @@ public class Hero
 	}
 	public Rectangle getNextRectangle()
 	{
-		return new Rectangle(x+xspe,y+yspe,hero_w,hero_h);
+		return new Rectangle(x+speed_x,y+speed_y,hero_w,hero_h);
 	}
 	protected void touchWithObjs() 
 	{
@@ -358,34 +358,34 @@ public class Hero
 			GameObject obj=null;
 			obj = objs.get(i);
 			
-			if((x>obj.x&&x<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h)
-				||(x+hero_w>obj.x&&x+hero_w<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h))//穿越物体检测1
+			if((x>obj.getPosX()&&x<obj.getPosX()+obj.all_w&&y>obj.getPosY()&&y<obj.getPosY()+obj.all_h)
+				||(x+hero_w>obj.getPosX()&&x+hero_w<obj.getPosX()+obj.all_w&&y>obj.getPosY()&&y<obj.getPosY()+obj.all_h))//穿越物体检测1
 			{
-				if(obj.y>=y-hero_h) 
+				if(obj.getPosY()>=y-hero_h) 
 					{
-						y=obj.y-hero_h;
-						yspe=1;
+						y=obj.getPosY()-hero_h;
+						speed_y=1;
 						System.out.println("Hero穿越物体检测1退出");
 						return;
 					}
-				if(xspe>=0)
+				if(speed_x>=0)
 				{
-					x=obj.x-hero_w;
+					x=obj.getPosX()-hero_w;
 				}
 				else
 				{
-					x=obj.x+obj.all_w;
+					x=obj.getPosX()+obj.all_w;
 				}
 				act=Action.UNSTAND;
 				System.out.println("Hero穿越物体检测1");
 			}
-			if((obj.draw==true&&getNextRectangle().intersects(obj.getRectangle())==true&&(obj!=obj1&&obj!=obj2))||obj.throughCheck(this))
+			if((obj.draw==true&&getNextRectangle().intersects(obj.getTotalRectangle())==true&&(obj!=obj1&&obj!=obj2))||obj.throughCheck(this))
 			{
 				if(obj.throughCheck(this))//穿越物体检测2
 				{
-					if(obj.y>=y) return;
-					x-=xspe;
-					y-=yspe;
+					if(obj.getPosY()>=y) return;
+					x-=speed_x;
+					y-=speed_y;
 					System.out.println("Hero穿越物体检测2");
 				}
 				if(obj1==null)
@@ -406,9 +406,9 @@ public class Hero
 		}
 		if(obj1!=null&&obj2==null)//只有一个物体与mario接触时
 		{
-			if(y<=obj1.y)
+			if(y<=obj1.getPosY())
 			{
-				y=obj1.y-hero_h;
+				y=obj1.getPosY()-hero_h;
 				act=Action.STAND;
 			}
 			else
@@ -416,18 +416,18 @@ public class Hero
 				act=Action.UNSTAND;
 			}
 			
-			if(x>=obj1.x+obj1.all_w&&xspe<0)
+			if(x>=obj1.getPosX()+obj1.all_w&&speed_x<0)
 			{
 				touch=Action.LTOUCH;
 			}
-			else if(x+hero_w<=obj1.x&&xspe>0)
+			else if(x+hero_w<=obj1.getPosX()&&speed_x>0)
 			{
 				touch=Action.RTOUCH;
 			}
-			else if(y>=obj1.y+obj1.all_h&&yspe<0)
+			else if(y>=obj1.getPosY()+obj1.all_h&&speed_y<0)
 			{
 				touch=Action.BUNT;
-				y=obj1.y+obj1.all_h;
+				y=obj1.getPosY()+obj1.all_h;
 			}
 			else
 			{
@@ -439,11 +439,11 @@ public class Hero
 		else if(obj1!=null&&obj2!=null)//有两个物体与mario接触时
 		{
 			int ground=0;//找出作为地面的物体和作为墙的物体
-			if(x+hero_w>=obj1.x&&x<=obj1.x+obj1.all_w&&obj1.y>=y)
+			if(x+hero_w>=obj1.getPosX()&&x<=obj1.getPosX()+obj1.all_w&&obj1.getPosY()>=y)
 			{
 				ground=1;
 			}
-			else if(x+hero_w>=obj2.x&&x<=obj2.x+obj2.all_w&&obj2.y>=y)
+			else if(x+hero_w>=obj2.getPosX()&&x<=obj2.getPosX()+obj2.all_w&&obj2.getPosY()>=y)
 			{
 				ground=2;
 			}
@@ -462,11 +462,11 @@ public class Hero
 			{
 				obj=obj1;
 			}
-			if(x+hero_w>=obj.x+obj.all_w&&xspe<=0)
+			if(x+hero_w>=obj.getPosX()+obj.all_w&&speed_x<=0)
 			{
 				touch=Action.LTOUCH;
 			}
-			else if(x<=obj.x&&xspe>=0)
+			else if(x<=obj.getPosX()&&speed_x>=0)
 			{
 				touch=Action.RTOUCH;
 			}

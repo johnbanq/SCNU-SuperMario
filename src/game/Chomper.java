@@ -101,14 +101,14 @@ public class Chomper extends GameCreature
 		{
 			System.out.println("Wrong Ground in Flower");
 		}
-		g.drawImage(img, x, y, null);
+		g.drawImage(img, getPosX(), getPosY(), null);
 		
 		Color c = g.getColor();
-		g.drawImage(img, x, y, null);
+		g.drawImage(img, getPosX(), getPosY(), null);
 		g.setColor(Color.black);
-		g.fillOval(x,y,5,5);
-		g.fillOval(x+all_w,y,5,5);
-		g.fillOval(x,y+all_h,5,5);
+		g.fillOval(getPosX(),getPosY(),5,5);
+		g.fillOval(getPosX()+all_w,getPosY(),5,5);
+		g.fillOval(getPosX(),getPosY()+all_h,5,5);
 		g.setColor(c);
 		
 //		touchWithHero(gc.player1);
@@ -128,53 +128,53 @@ public class Chomper extends GameCreature
 	{
 		if(ground=="Grass")
 		{
-			if(y>=in_y)
+			if(getPosY()>=in_y)
 			{
 				yspe=-YSPE;
 			}
-			else if(y<=in_y-all_h*0.8)
+			else if(getPosY()<=in_y-all_h*0.8)
 			{
 				yspe=YSPE;
 			}
 		}
 		else if(ground=="Pipe")
 		{
-			if(y>in_y)
+			if(getPosY()>in_y)
 			{
 				yspe=0;
-				y=in_y;
+				setPosY(in_y);
 			}
-			else if(y<=in_y-all_h*0.8)
+			else if(getPosY()<=in_y-all_h*0.8)
 			{
 				yspe=YSPE;
 			}
 		}
 		
-		y+=yspe;
+		setPosY(getPosY() + yspe);
 	}
 	
 	public void touchWithHero(Hero hero) {
 		super.touchWithHero(hero);
 		if(draw==false||hero.live==false) return;
 		//System.out.println(hero.getNextRectangle().intersects(getNextRectangle()));
-		if((hero.x>=x&&hero.x<=x+all_w)&&hero.y<=y&&ground=="Pipe")
+		if((hero.x>=getPosX()&&hero.x<=getPosX()+all_w)&&hero.y<=getPosY()&&ground=="Pipe")
 		{
 			yspe=-YSPE;
 		}
-		if(hero.getNextRectangle().intersects(getRectangle())
-			||hero.getARectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getRectangle())
-			||hero.getARectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getRectangle())
+		if(hero.getNextRectangle().intersects(getTotalRectangle())
+			||hero.getARectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getTotalRectangle())
+			||hero.getARectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getTotalRectangle())
 				)
 		{
-			if(hero.y+hero.hero_h==y||((hero.x>=x&&hero.x<=x+all_w)&&hero.y+hero.hero_h>=y&&ground=="Pipe"))
+			if(hero.y+hero.hero_h==getPosY()||((hero.x>=getPosX()&&hero.x<=getPosX()+all_w)&&hero.y+hero.hero_h>=getPosY()&&ground=="Pipe"))
 			{
 				touch=Action.BUNT;
 			}
-			else if(hero.x<=x)
+			else if(hero.x<=getPosX())
 			{
 				touch=Action.LTOUCH;
 			}
-			else if(hero.x+hero.hero_w>=x+all_w)
+			else if(hero.x+hero.hero_w>=getPosX()+all_w)
 			{
 				touch=Action.RTOUCH;
 			}

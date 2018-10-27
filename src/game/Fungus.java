@@ -77,14 +77,14 @@ public class Fungus extends GameCreature
 			all_h=20;
 			img=obj_imgs.get("FS3");
 		}
-		g.drawImage(img, x, y, null);
+		g.drawImage(img, getPosX(), getPosY(), null);
 		
 		Color c = g.getColor();
-		g.drawImage(img, x, y, null);
+		g.drawImage(img, getPos().x, getPos().y, null);
 		g.setColor(Color.black);
-		g.fillOval(x,y,5,5);
-		g.fillOval(x+all_w,y,5,5);
-		g.fillOval(x,y+all_h,5,5);
+		g.fillOval(getPosX(),getPosY(),5,5);
+		g.fillOval(getPosX()+all_w,getPosY(),5,5);
+		g.fillOval(getPosX(),getPosY()+all_h,5,5);
 		g.setColor(c);
 		
 		touchWithObjs();
@@ -99,7 +99,7 @@ public class Fungus extends GameCreature
 
 	protected void xMove() {
 		if(hit==true) return;
-		x+=xspe;
+		setPosX(getPosX() + xspe);
 	}
 
 	protected void yMove() {
@@ -111,7 +111,7 @@ public class Fungus extends GameCreature
 		{
 			yspe=1;
 		}
-		y+=yspe;
+		setPosY(getPosY() + yspe);
 	}
 
 	public void touchWithHero(Hero hero) {
@@ -122,15 +122,15 @@ public class Fungus extends GameCreature
 			||hero.getARectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
 				)
 		{
-			if(hero.y+hero.hero_h<=y)
+			if(hero.y+hero.hero_h<=getPosY())
 			{
 				touchhero=Action.BUNT;
 			}
-			else if(hero.x<=x)
+			else if(hero.x<=getPosX())
 			{
 				touchhero=Action.LTOUCH;
 			}
-			else if(hero.x+hero.hero_w>=x+all_w)
+			else if(hero.x+hero.hero_w>=getPosX()+all_w)
 			{
 				touchhero=Action.RTOUCH;
 			}
@@ -146,7 +146,7 @@ public class Fungus extends GameCreature
 		super.action();
 		if(touchhero==Action.BUNT)
 		{
-			hero.yspe=-hero.y_add;
+			hero.speed_y=-hero.y_add;
 			if(hit==true)
 			{
 				disappear();
@@ -174,28 +174,28 @@ public class Fungus extends GameCreature
 		{
 			GameObject obj=null;
 			obj = objs.get(i);
-			if((obj.draw==true&&getNextRectangle().intersects(obj.getRectangle())==true
+			if((obj.draw==true&&getNextRectangle().intersects(obj.getTotalRectangle())==true
 					&&(obj!=obj1&&obj!=obj2&&obj!=this))||obj.throughCheck(this)
-					||((x+xspe>obj.x&&x+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h)||(x+all_w+xspe>obj.x&&x+all_w+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h)))
+					||((getPosX()+xspe>obj.getPosX()&&getPosX()+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h)||(getPosX()+all_w+xspe>obj.getPosX()&&getPosX()+all_w+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h)))
 			{
-				if((x+xspe>obj.x&&x+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h)||(x+all_w+xspe>obj.x&&x+all_w+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h))
+				if((getPosX()+xspe>obj.getPosX()&&getPosX()+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h)||(getPosX()+all_w+xspe>obj.getPosX()&&getPosX()+all_w+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h))
 				{//穿越护体检测2
-					if(obj.y>=y) return;
+					if(obj.getPosY()>=getPosY()) return;
 					if(xspe>=0)
 					{
-						x=obj.x-all_w;
+						setPosX(obj.getPosX()-all_w);
 					}
 					else
 					{
-						x=obj.x+obj.all_w;
+						setPosX(obj.getPosX()+obj.all_w);
 					}
 				//	System.out.println("FU穿越物体检测1");
 				}
 				if(obj.throughCheck(this))//穿越物体检测2
 				{
-					if(obj.y>=y) return;
-					x-=xspe;
-					y-=yspe;
+					if(obj.getPosY()>=getPosY()) return;
+					setPosX(getPosX() - xspe);
+					setPosY(getPosY() - yspe);
 				//	System.out.println("FU穿越物体检测2");
 				}
 				if(obj1==null)
@@ -217,9 +217,9 @@ public class Fungus extends GameCreature
 		
 		if(obj1!=null&&obj2==null)//只有一个物体与mario接触时
 		{
-			if(y<=obj1.y)
+			if(getPosY()<=obj1.getPosY())
 			{
-				y=obj1.y-all_h;
+				setPosY(obj1.getPosY()-all_h);
 				act=Action.STAND;
 			}
 			else
@@ -227,19 +227,19 @@ public class Fungus extends GameCreature
 				act=Action.UNSTAND;
 			}
 			
-			if(x>=obj1.x+obj1.all_w&&xspe<0)
+			if(getPosX()>=obj1.getPosX()+obj1.all_w&&xspe<0)
 			{
 				touch=Action.LTOUCH;
-				x=obj1.x+obj1.all_w+XSPE;	
+				setPosX(obj1.getPosX()+obj1.all_w+XSPE);	
 				xspe=XSPE;
 			}
-			else if(x+all_w<=obj1.x&&xspe>0)
+			else if(getPosX()+all_w<=obj1.getPosX()&&xspe>0)
 			{
 				touch=Action.RTOUCH;
-				x=obj1.x-all_w-XSPE;
+				setPosX(obj1.getPosX()-all_w-XSPE);
 				xspe=-XSPE;
 			}
-			else if(y>=obj1.y+obj1.all_h&&yspe<0)
+			else if(getPosY()>=obj1.getPosY()+obj1.all_h&&yspe<0)
 			{
 				touch=Action.BUNT;
 			}
@@ -254,11 +254,11 @@ public class Fungus extends GameCreature
 		{
 			int ground=0;//找出作为地面的物体和作为墙的物体
 
-			if(x+all_w>obj1.x&&x<obj1.x+obj1.all_w&&obj1.y>y)
+			if(getPosX()+all_w>obj1.getPosX()&&getPosX()<obj1.getPosX()+obj1.all_w&&obj1.getPosY()>getPosY())
 			{
 				ground=1;
 			}
-			else if(x+all_w>obj2.x&&x<=obj2.x+obj2.all_w&&obj2.y>y)
+			else if(getPosX()+all_w>obj2.getPosX()&&getPosX()<=obj2.getPosX()+obj2.all_w&&obj2.getPosY()>getPosY())
 			{
 				ground=2;
 			}
@@ -281,10 +281,10 @@ public class Fungus extends GameCreature
 			}
 			
 			//两个物体碰撞时垂直方向分析
-			if(x<obj_ground.x+obj_ground.all_w||x+all_w>obj_ground.x) //站在地面块中
+			if(getPosX()<obj_ground.getPosX()+obj_ground.all_w||getPosX()+all_w>obj_ground.getPosX()) //站在地面块中
 			{
 				act=Action.STAND;
-				y=obj_ground.y-all_h;
+				setPosY(obj_ground.getPosY()-all_h);
 			}
 			else
 			{
@@ -295,13 +295,13 @@ public class Fungus extends GameCreature
 			if(xspe<0)
 			{
 				touch=Action.LTOUCH;
-				x=obj_wall.x+obj_wall.all_w+XSPE;	
+				setPosX(obj_wall.getPosX()+obj_wall.all_w+XSPE);	
 				xspe=XSPE;
 			}
 			else if(xspe>0)
 			{
 				touch=Action.RTOUCH;
-				x=obj_wall.x-all_w-XSPE;
+				setPosX(obj_wall.getPosX()-all_w-XSPE);
 				xspe=-XSPE;
 			}
 			else

@@ -73,10 +73,10 @@ public class Mushroom extends GameCreature
 		}
 		
 		Color c = g.getColor();
-		g.drawImage(img, x, y, null);
+		g.drawImage(img, getPosX(), getPosY(), null);
 		g.setColor(Color.black);
-		g.fillOval(x,y,5,5);
-		g.fillOval(x+obj_w,y,5,5);
+		g.fillOval(getPosX(),getPosY(),5,5);
+		g.fillOval(getPosX()+obj_w,getPosY(),5,5);
 		g.setColor(c);
 		
 		touchWithObjs();
@@ -99,7 +99,7 @@ public class Mushroom extends GameCreature
 
 	protected void xMove()
 	{
-		x+=xspe;
+		setPosX(getPosX() + xspe);
 	}
 	
 	protected void yMove()
@@ -112,7 +112,7 @@ public class Mushroom extends GameCreature
 		{
 			yspe=-YSPE;
 		}
-		y+=yspe;
+		setPosY(getPosY() + yspe);
 	}
 	
 	protected void action() {
@@ -139,7 +139,7 @@ public class Mushroom extends GameCreature
 	{
 		super.touchWithHero(hero);
 		if(draw==false) return;
-		if(hero.getNextRectangle().intersects(this.getRectangle()))
+		if(hero.getNextRectangle().intersects(this.getTotalRectangle()))
 		{
 			touch=Action.BUNT;
 		}
@@ -186,28 +186,28 @@ public class Mushroom extends GameCreature
 				System.out.println("GC穿越物体检测1");
 				//System.out.println(getNextRectangle()+" "+obj.getRectangle()+" "+getNextRectangle().intersects(obj.getRectangle()));
 			}*/
-			if((obj.draw==true&&getNextRectangle().intersects(obj.getRectangle())==true
+			if((obj.draw==true&&getNextRectangle().intersects(obj.getTotalRectangle())==true
 					&&(obj!=obj1&&obj!=obj2))||obj.throughCheck(this)
-					||((x+xspe>obj.x&&x+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h)||(x+all_w+xspe>obj.x&&x+all_w+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h)))
+					||((getPosX()+xspe>obj.getPosX()&&getPosX()+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h)||(getPosX()+all_w+xspe>obj.getPosX()&&getPosX()+all_w+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h)))
 			{
-				if((x+xspe>obj.x&&x+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h)||(x+all_w+xspe>obj.x&&x+all_w+xspe<obj.x+obj.all_w&&y>obj.y&&y<obj.y+obj.all_h))
+				if((getPosX()+xspe>obj.getPosX()&&getPosX()+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h)||(getPosX()+all_w+xspe>obj.getPosX()&&getPosX()+all_w+xspe<obj.getPosX()+obj.all_w&&getPosY()>obj.getPosY()&&getPosY()<obj.getPosY()+obj.all_h))
 				{//穿越护体检测2
-					if(obj.y>=y) return;
+					if(obj.getPosY()>=getPosY()) return;
 					if(xspe>=0)
 					{
-						x=obj.x-all_w;
+						setPosX(obj.getPosX()-all_w);
 					}
 					else
 					{
-						x=obj.x+obj.all_w;
+						setPosX(obj.getPosX()+obj.all_w);
 					}
 					System.out.println("MU穿越物体检测1");
 				}
 				if(obj.throughCheck(this))//穿越物体检测2
 				{
-					if(obj.y>=y) return;
-					x-=xspe;
-					y-=yspe;
+					if(obj.getPosY()>=getPosY()) return;
+					setPosX(getPosX() - xspe);
+					setPosY(getPosY() - yspe);
 					System.out.println("MU穿越物体检测2");
 				}
 				if(obj1==null)
@@ -229,9 +229,9 @@ public class Mushroom extends GameCreature
 		
 		if(obj1!=null&&obj2==null)//只有一个物体与mario接触时
 		{
-			if(y<=obj1.y)
+			if(getPosY()<=obj1.getPosY())
 			{
-				y=obj1.y-all_h;
+				setPosY(obj1.getPosY()-all_h);
 				act=Action.STAND;
 			}
 			else
@@ -239,19 +239,19 @@ public class Mushroom extends GameCreature
 				act=Action.UNSTAND;
 			}
 			
-			if(x>=obj1.x+obj1.all_w&&xspe<0)
+			if(getPosX()>=obj1.getPosX()+obj1.all_w&&xspe<0)
 			{
 				touch=Action.LTOUCH;
-				x=obj1.x+obj1.all_w+XSPE;	
+				setPosX(obj1.getPosX()+obj1.all_w+XSPE);	
 				xspe=XSPE;
 			}
-			else if(x+all_w<=obj1.x&&xspe>0)
+			else if(getPosX()+all_w<=obj1.getPosX()&&xspe>0)
 			{
 				touch=Action.RTOUCH;
-				x=obj1.x-all_w-XSPE;
+				setPosX(obj1.getPosX()-all_w-XSPE);
 				xspe=-XSPE;
 			}
-			else if(y>=obj1.y+obj1.all_h&&yspe<0)
+			else if(getPosY()>=obj1.getPosY()+obj1.all_h&&yspe<0)
 			{
 				touch=Action.BUNT;
 			}
@@ -265,11 +265,11 @@ public class Mushroom extends GameCreature
 		else if(obj1!=null&&obj2!=null)//有两个物体与mario接触时
 		{
 			int ground=0;//找出作为地面的物体和作为墙的物体
-			if(x+all_w>=obj1.x&&x<=obj1.x+obj1.all_w&&obj1.y>=y)
+			if(getPosX()+all_w>=obj1.getPosX()&&getPosX()<=obj1.getPosX()+obj1.all_w&&obj1.getPosY()>=getPosY())
 			{
 				ground=1;
 			}
-			else if(x+all_w>=obj2.x&&x<=obj2.x+obj2.all_w&&obj2.y>=y)
+			else if(getPosX()+all_w>=obj2.getPosX()&&getPosX()<=obj2.getPosX()+obj2.all_w&&obj2.getPosY()>=getPosY())
 			{
 				ground=2;
 			}
@@ -288,12 +288,12 @@ public class Mushroom extends GameCreature
 			{
 				obj=obj1;
 			}
-			if(x+all_w>=obj.x+obj.all_w&&xspe<=0)
+			if(getPosX()+all_w>=obj.getPosX()+obj.all_w&&xspe<=0)
 			{
 				touch=Action.LTOUCH;
 				xspe=XSPE;
 			}
-			else if(x<=obj.x&&xspe>=0)
+			else if(getPosX()<=obj.getPosX()&&xspe>=0)
 			{
 				touch=Action.RTOUCH;
 				xspe=-XSPE;

@@ -35,11 +35,11 @@ public class GameCreature extends GameObject
 	protected void setAvailable() 
 	{
 		if(available==false) return;
-		if(getRectangle().intersects(new Rectangle(0,0,GameClient.F_W,GameClient.F_H)))
+		if(getTotalRectangle().intersects(new Rectangle(0,0,GameClient.F_W,GameClient.F_H)))
 		{
 			this.draw=true;
 		}
-		else if(x<=-GameClient.F_W/2)
+		else if(getPos().x<=-GameClient.F_W/2)
 		{
 			draw=false;
 			available=false;
@@ -86,9 +86,9 @@ public class GameCreature extends GameObject
 		this.objs = objs;
 	}
 	
-	public Rectangle getRectangle()
+	public Rectangle getTotalRectangle()
 	{
-		return new Rectangle(x,y,all_w,all_h);
+		return new Rectangle(getPos().x,getPos().y,all_w,all_h);
 	}
 	public Rectangle getARectangle(int x,int y,int w,int h)
 	{
@@ -96,7 +96,7 @@ public class GameCreature extends GameObject
 	}
 	public Rectangle getNextRectangle()
 	{
-		return new Rectangle(x+xspe,y+yspe,all_w,all_h);
+		return new Rectangle(getPos().x+xspe,getPos().y+yspe,all_w,all_h);
 	}
 	/*protected void touchWithObjs() 
 	{

@@ -61,22 +61,22 @@ public class Pipe extends GameObject
 					else if(i==2)
 					img=obj_imgs.get("P4");
 				}
-				g.drawImage(img,x+(i-1)*obj_w,y+(j-1)*obj_h, null);
+				g.drawImage(img,getPosX()+(i-1)*obj_w,getPosY()+(j-1)*obj_h, null);
 			}
 		}
 		Color c = g.getColor();
 		g.setColor(Color.black);
-		g.fillOval(x,y,5,5);
-		g.fillOval(x+all_w,y,5,5);
-		g.fillOval(x,y+all_h,5,5);
+		g.fillOval(getPosX(),getPosY(),5,5);
+		g.fillOval(getPosX()+all_w,getPosY(),5,5);
+		g.fillOval(getPosX(),getPosY()+all_h,5,5);
 		g.setColor(c);
 	}
 	
 	protected void touchWithHero(Hero hero) {
 		super.touchWithHero(hero);
-		if(hero.getNextRectangle().intersects(this.getRectangle()))
+		if(hero.getNextRectangle().intersects(this.getTotalRectangle()))
 		{
-			if(hero.y<=y+all_h)
+			if(hero.y<=getPosY()+all_h)
 			{
 				touch=Action.BUNT;
 			}

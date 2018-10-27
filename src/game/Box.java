@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
+import assets.ImageLoader;
+import assets.ImageName;
 import ui.*;
 import main.GameClient;
 
@@ -19,17 +21,10 @@ public class Box extends GameObject
 	
 	static 
 	{
-		imgs = new Image []
-				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/box1.1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/box1.2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/box1.3.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/box1.4.png"))
-				};
-		obj_imgs.put("B1", imgs[0]);
-		obj_imgs.put("B2", imgs[1]);
-		obj_imgs.put("B3", imgs[2]);
-		obj_imgs.put("B4", imgs[3]);
+		obj_imgs.put("B1", ImageLoader.loadImage(tk,ImageName.BOX_V1));
+		obj_imgs.put("B2", ImageLoader.loadImage(tk,ImageName.BOX_V2));
+		obj_imgs.put("B3", ImageLoader.loadImage(tk,ImageName.BOX_V3));
+		obj_imgs.put("B4", ImageLoader.loadImage(tk,ImageName.BOX_V4));
 	}
 
 	public Box(int x, int y, GameClient gc) {
@@ -65,7 +60,7 @@ public class Box extends GameObject
 			img=obj_imgs.get("B4");
 			d_time=1;
 		}
-		g.drawImage(img, x, y, null);
+		g.drawImage(img, getPosX(), getPosY(), null);
 		if(mush!=null)
 			mush.draw(g);
 	}
@@ -73,9 +68,9 @@ public class Box extends GameObject
 	protected void touchWithHero(Hero hero) {
 		super.touchWithHero(hero);
 		if(hero.live==false) return;
-		if(hero.getNextRectangle().intersects(this.getRectangle()))
+		if(hero.getNextRectangle().intersects(this.getTotalRectangle()))
 		{
-			if(hero.y>=y+all_h)
+			if(hero.y>=getPosY()+all_h)
 			{
 				touch=Action.BUNT;
 			}
@@ -94,7 +89,7 @@ public class Box extends GameObject
 		{
 			yspe=-Y_SPE;
 			if(mush==null)
-			mush = new Mushroom(x+obj_w/5,y-25,this,gc);
+			mush = new Mushroom(getPosX()+obj_w/5,getPosY()-25,this,gc);
 			
 			//×²Ïä×ÓÒôÐ§
 			new GameAudio("×²Ïä×Ó").start();
@@ -102,17 +97,17 @@ public class Box extends GameObject
 		else if(touch==Action.UNTOUCH)
 		{
 			
-			if(y<in_y)
+			if(getPosY()<in_y)
 			{
 				yspe+=G_ADD;
 			}
-			if(y+yspe>in_y)
+			if(getPosY()+yspe>in_y)
 			{
-				y=in_y;
+				setPosY(in_y);
 				yspe=0;
 			}
 		}
-		y+=yspe;
+		setPosY(getPosY() + yspe);
 
 	}
 

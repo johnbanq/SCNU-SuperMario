@@ -43,7 +43,8 @@ public class ObjectMap
 			//一号蘑菇怪
 			objs.add(new Fungus(150,300,Dirction.R,gc));
 			//一号食人花
-			objs.add(new Chomper(250,420,"Grass",gc));
+			objs.add(new Box(250,450,gc));
+			//objs.add(new Chomper(250,420,"Grass",gc));
 			//一号地面
 			objs.add(new Grass(300,380,3,2,gc));
 			objs.add(new Grass(-100,430,20,6,gc));

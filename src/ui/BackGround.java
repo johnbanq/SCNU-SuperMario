@@ -69,9 +69,9 @@ public class BackGround
 	public void move()
 	{
 		player = gc.player1;
-		if(player.x+player.xspe>Hero.LIM_X2&&player.finish==false)
+		if(player.x+player.speed_x>Hero.LIM_X2&&player.finish==false)
 		{
-			x-=player.xspe/4;
+			x-=player.speed_x/4;
 		}
 		if(img_name=="CLOUD")
 		{

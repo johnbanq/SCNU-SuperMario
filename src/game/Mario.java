@@ -174,7 +174,7 @@ public class Mario extends Hero
 						}
 					else if(march==false)
 					{
-						if(xspe>=-5) g.drawImage(hero_img.get("LR0"),x,y,null);
+						if(speed_x>=-5) g.drawImage(hero_img.get("LR0"),x,y,null);
 						else 
 						g.drawImage(hero_img.get("SR"),x,y,null);
 					}
@@ -201,7 +201,7 @@ public class Mario extends Hero
 					}
 					else if(march==false)
 					{
-						if(xspe<=5) g.drawImage(hero_img.get("RR0"),x,y,null);
+						if(speed_x<=5) g.drawImage(hero_img.get("RR0"),x,y,null);
 						else 
 						g.drawImage(hero_img.get("SL"),x,y,null);
 					}
@@ -212,11 +212,11 @@ public class Mario extends Hero
 			{
 				if(move_dir==Dirction.L)
 				{
-					if(yspe<0)
+					if(speed_y<0)
 					{
 						g.drawImage(hero_img.get("LJ1"),x,y,null);
 					}
-					else if(yspe>=0)
+					else if(speed_y>=0)
 					{
 						g.drawImage(hero_img.get("LJ2"),x,y,null);
 					}
@@ -224,11 +224,11 @@ public class Mario extends Hero
 				}
 				else if(move_dir==Dirction.R)
 				{
-					if(yspe<0)
+					if(speed_y<0)
 					{
 						g.drawImage(hero_img.get("RJ1"),x,y,null);
 					}
-					else if(yspe>=0)
+					else if(speed_y>=0)
 					{
 						g.drawImage(hero_img.get("RJ2"),x,y,null);
 					}
@@ -275,7 +275,7 @@ public class Mario extends Hero
 						}
 					else if(march==false)
 					{
-						if(xspe>=-5) g.drawImage(hero_img.get("SLS"),x,y,null);
+						if(speed_x>=-5) g.drawImage(hero_img.get("SLS"),x,y,null);
 						else 
 						g.drawImage(hero_img.get("SLSP"),x,y,null);
 					}
@@ -302,7 +302,7 @@ public class Mario extends Hero
 					}
 					else if(march==false)
 					{
-						if(xspe<=5) g.drawImage(hero_img.get("SRS"),x,y,null);
+						if(speed_x<=5) g.drawImage(hero_img.get("SRS"),x,y,null);
 						else 
 						g.drawImage(hero_img.get("SRSP"),x,y,null);
 					}
@@ -313,11 +313,11 @@ public class Mario extends Hero
 			{
 				if(move_dir==Dirction.L)
 				{
-					if(yspe<0)
+					if(speed_y<0)
 					{
 						g.drawImage(hero_img.get("SLJ1"),x,y,null);
 					}
-					else if(yspe>=0)
+					else if(speed_y>=0)
 					{
 						g.drawImage(hero_img.get("SLJ2"),x,y,null);
 					}
@@ -325,11 +325,11 @@ public class Mario extends Hero
 				}
 				else if(move_dir==Dirction.R)
 				{
-					if(yspe<0)
+					if(speed_y<0)
 					{
 						g.drawImage(hero_img.get("SRJ1"),x,y,null);
 					}
-					else if(yspe>=0)
+					else if(speed_y>=0)
 					{
 						g.drawImage(hero_img.get("SRJ2"),x,y,null);
 					}

@@ -30,7 +30,7 @@ public class Tower extends GameObject
 
 	public void draw(Graphics g) {
 		super.draw(g);
-		g.drawImage(obj_imgs.get("T1"),x,y,null);
+		g.drawImage(obj_imgs.get("T1"),getPosX(),getPosY(),null);
 		touchWithHero(gc.player1);
 	}
 
@@ -44,7 +44,7 @@ public class Tower extends GameObject
 
 	protected void touchWithHero(Hero hero) {
 		super.touchWithHero(hero);
-		if(getRectangle().intersects(hero.getRectangle())==true)
+		if(getTotalRectangle().intersects(hero.getRectangle())==true)
 		{
 			hero.finish();
 			touchhero=Action.BUNT;

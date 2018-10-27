@@ -2,6 +2,7 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.Random;
@@ -13,12 +14,15 @@ import main.GameClient;
 
 public class GameObject 
 {
-	public int x,y,in_x;
-	public int obj_w=28, obj_h=28;
+	public GameClient gc=null;
+	
+	private Point pos;
+	public int in_x;
+	public int obj_w=28, obj_h=28;//object width and height
 	public int hasrun_x=0;
 	public int all_w=0;
 	public int all_h=0;
-	public GameClient gc=null;
+	
 	public boolean draw = true,available=true;
 	protected static Toolkit tk =Toolkit.getDefaultToolkit();
 	protected static Random random = new Random();
@@ -31,8 +35,7 @@ public class GameObject
 	
 	GameObject(int x,int y,GameClient gc)
 	{
-		this.x=x;
-		this.y=y;
+		this.pos = new Point(x,y);
 		this.gc=gc;
 		all_w=obj_w;
 		all_h=obj_h;
@@ -54,9 +57,9 @@ public class GameObject
 	protected void setAvailable() 
 	{
 		if(available==false) return;
-		if(getRectangle().intersects(new Rectangle(0,0,GameClient.F_W,GameClient.F_H))==false)
+		if(getTotalRectangle().intersects(new Rectangle(0,0,GameClient.F_W,GameClient.F_H))==false)
 		{
-			if(x<=-GameClient.F_W/2)
+			if(pos.x<=-GameClient.F_W/2)
 			{
 				draw=false;
 				//available=false;
@@ -67,33 +70,33 @@ public class GameObject
 	public void move()
 	{
 		if(available==true)
-		player = gc.player1;
+			player = gc.player1;
 		{
-			if(player.x+player.xspe>Hero.LIM_X2&&player.finish==false)
+			if(player.x+player.speed_x>Hero.LIM_X2&&player.finish==false)
 			{
-				x-=player.xspe;
+				pos.x-=player.speed_x;
 			}
 		}
 		
 	}
 	
-	public Rectangle getRectangle()
-	{
-		return new Rectangle(x,y,all_w,all_h);
+	public Rectangle getTotalRectangle(){
+		return new Rectangle(pos.x,pos.y,all_w,all_h);
 	}
 	
-	protected void touchWithHero(Hero hero)
-	{
-		if(this.draw==false) return ;
+	protected void touchWithHero(Hero hero){
+		if(this.draw==false) 
+			return ;
 	}
 	
+	//collision checker
 	public boolean throughCheck(Hero hero)
 	{
 		int x,y,x1,y1,r_x,r_y,r_w,r_h;
 		x=hero.x;
 		y=hero.y;
-		x1=hero.x+hero.xspe;
-		y1=hero.y+hero.yspe;
+		x1=hero.x+hero.speed_x;
+		y1=hero.y+hero.speed_y;
 		if(x<=x1)
 		{
 			r_x=x;
@@ -104,12 +107,12 @@ public class GameObject
 			r_y=y;
 		}
 		else r_y=y1;
-		if(hero.xspe<0) r_w=-hero.xspe;
-		else r_w=hero.xspe;
-		if(hero.yspe<0) r_h=-hero.yspe;
-		else r_h=hero.yspe;
+		if(hero.speed_x<0) r_w=-hero.speed_x;
+		else r_w=hero.speed_x;
+		if(hero.speed_y<0) r_h=-hero.speed_y;
+		else r_h=hero.speed_y;
 		Rectangle move_r=new Rectangle(r_x,r_y,r_w,r_h);
-		if(move_r.intersects(this.getRectangle()))
+		if(move_r.intersects(this.getTotalRectangle()))
 		{
 			return true;
 		}
@@ -119,10 +122,10 @@ public class GameObject
 	public boolean throughCheck(GameCreature gc)
 	{
 		int x,y,x1,y1,r_x,r_y,r_w,r_h;
-		x=gc.x;
-		y=gc.y;
-		x1=gc.x+gc.xspe;
-		y1=gc.y+gc.yspe;
+		x=gc.getPosX();
+		y=gc.getPosY();
+		x1=gc.getPosX()+gc.xspe;
+		y1=gc.getPosY()+gc.yspe;
 		if(x<=x1)
 		{
 			r_x=x;
@@ -138,15 +141,38 @@ public class GameObject
 		if(gc.yspe<0) r_h=-gc.yspe;
 		else r_h=gc.yspe;
 		Rectangle move_r=new Rectangle(r_x,r_y,r_w,r_h);
-		if(move_r.intersects(this.getRectangle()))
+		if(move_r.intersects(this.getTotalRectangle()))
 		{
 			return true;
 		}
 		else return false;
 	}
 	
-	protected void action()
-	{
+	protected void action(){
 		
+	}
+
+	public Point getPos() {
+		return new Point(pos.x,pos.y);
+	}
+
+	public void setPos(Point pos) {
+		this.pos = pos;
+	}
+	
+	public int getPosX() {
+		return pos.x;
+	}
+	
+	public int getPosY() {
+		return pos.y;
+	}
+	
+	public void setPosX(int v) {
+		pos.x=v;
+	}
+	
+	public void setPosY(int v) {
+		pos.y=v;
 	}
 }
