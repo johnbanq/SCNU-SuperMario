@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import sounds.Mp3Thread;
+
 
 class Menu 
 {
