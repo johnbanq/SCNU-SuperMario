@@ -53,13 +53,13 @@ public class BackGroundImage {
 	
 
 	public void move(Hero player) {
-		if (player.x + player.speed_x > Hero.LIM_X2 && player.finish == false) {
-			x -= player.speed_x / 4;
-		}
-		if (img_name == "CLOUD") {
-			x -= x_speed;
-		} else if (img_name == "FOREST") {
-
+		if(img_name == "CLOUD" || img_name == "FOREST") {
+			if (player.x + player.speed_x > Hero.LIM_X2 && player.finish == false) {
+				x -= player.speed_x / 4;
+			}	
+			if (img_name == "CLOUD") {
+				x -= x_speed;
+			}
 		} else {
 			x -= x_speed * 2;
 		}

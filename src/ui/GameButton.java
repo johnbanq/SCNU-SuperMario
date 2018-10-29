@@ -15,6 +15,8 @@ import ui.background.BackGroundImage;
 
 @SuppressWarnings("serial")
 public class GameButton extends JButton {
+	private ImageIcon imgicon = null, rollicon = null, pressedicon = null;
+	
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
 	private static Map<String, Image> obj_imgs = new HashMap<String, Image>();
 	static {
@@ -39,9 +41,8 @@ public class GameButton extends JButton {
 	}
 
 	GameButton(String name) {
-		ImageIcon imgicon = null, rollicon = null, pressedicon = null;
 		// 设置个状态显示的图片
-		if (name == "EIXT") {
+		if (name == "EXIT") {
 			imgicon = new ImageIcon(obj_imgs.get("BE1"));
 			rollicon = new ImageIcon(obj_imgs.get("BE2"));
 			pressedicon = new ImageIcon(obj_imgs.get("BE3"));

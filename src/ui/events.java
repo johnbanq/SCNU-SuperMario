@@ -4,7 +4,11 @@ class Event{
 	
 }
 
-class GameStartedEvent extends Event {
+class GameStartEvent extends Event {
+
+}
+
+class GameRestartEvent extends Event {
 
 }
 
