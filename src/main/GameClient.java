@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import game.*;
 import sounds.GameAudio;
 import ui.*;
-import ui.background.BackGroundMap2;
+import ui.background.BackGroundLayer;
 
 public class GameClient extends JFrame // JFrame重画不调用update 方法 双缓冲代码要写到paint中
 {
@@ -33,9 +33,9 @@ public class GameClient extends JFrame // JFrame重画不调用update 方法 双缓冲代码
 
 	Thread paint_thread = null;
 	public Mario player1 = new Mario(100, 100, this);
-	BackGroundMap2 bgmap = new BackGroundMap2(BackGroundMap2.BackgroundType.CLOUD_AND_FOREST, this);
-	public ObjectMap obj_map = new ObjectMap(1, this);
-	public ImageMap img_map = new ImageMap(1, this);
+	BackGroundLayer bgmap = new BackGroundLayer(BackGroundLayer.BackgroundType.GAME);
+	public FrontObjectLayer obj_map = new FrontObjectLayer(1, this);
+	public BackObjectLayer img_map = new BackObjectLayer(1, this);
 	Menu menu = new Menu(this);
 	public JButton b_start = null;
 	public JButton b_exit = null;
@@ -86,7 +86,7 @@ public class GameClient extends JFrame // JFrame重画不调用update 方法 双缓冲代码
 			label_t1.setVisible(false);
 		}
 		if (d_game == true) {
-			bgmap.draw(offscreen_g);
+			bgmap.render(offscreen_g,player1);
 			img_map.draw(offscreen_g);
 			obj_map.draw(offscreen_g);
 			player1.draw(offscreen_g);

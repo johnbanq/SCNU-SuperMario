@@ -18,14 +18,14 @@ import main.GameClient;
 import sounds.GameAudio;
 import sounds.Mp3Thread;
 import ui.background.BackGroundImage;
-import ui.background.BackGroundMap2;
+import ui.background.BackGroundLayer;
 
 
 public class Menu 
 {
 	protected GameClient gc;
 	protected boolean initialize=false;
-	protected BackGroundMap2 bgm1 = null,bgm2 = null;
+	protected BackGroundLayer bgm1 = null,bgm2 = null;
 	protected GameButton b_start=null,b_exit=null,b_restart=null;
 	protected Container c = null;
 	protected JLabel label_t1 = null,label_gameover=null,label_bg=null,label_win=null;
@@ -104,8 +104,8 @@ public class Menu
 		
 		
 		
-		bgm1 = new BackGroundMap2(BackGroundMap2.BackgroundType.MENU,gc);
-		bgm2 = new BackGroundMap2(BackGroundMap2.BackgroundType.GAME_OVER,gc);
+		bgm1 = new BackGroundLayer(BackGroundLayer.BackgroundType.PLAY_MENU);
+		bgm2 = new BackGroundLayer(BackGroundLayer.BackgroundType.GAME_OVER_MENU);
 	}
 	
 	public Menu(GameClient gc)
@@ -120,7 +120,7 @@ public class Menu
 			if(gc.player1.live==true)
 			{
 				//一开始进入游戏时的主菜单的背景
-				bgm1.draw(g);
+				bgm1.render(g,gc.player1);
 				
 				//组件重画
 				b_exit.repaint();
@@ -130,7 +130,7 @@ public class Menu
 			else if(gc.player1.live==false)
 			{
 				//死亡后菜单进入的背景
-				bgm2.draw(g);
+				bgm2.render(g,gc.player1);
 				
 				//音乐重新设置
 				if(mp3thread2.isAlive())
@@ -240,8 +240,6 @@ public class Menu
 					mp3thread2.start();
 				}
 			}
-			new GameAudio("点击").start();
-			System.out.println("点击！");
 		}
 		
 	}

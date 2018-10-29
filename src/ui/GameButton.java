@@ -1,33 +1,24 @@
 package ui;
-import java.awt.Component;
-import java.awt.Graphics;
+
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import main.GameClient;
+import sounds.GameAudio;
 import ui.background.BackGroundImage;
 
-
-public class GameButton extends JButton
-{
-	protected static Toolkit tk =Toolkit.getDefaultToolkit();
-	protected GameClient gc = null;
-	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();
-	protected static Image [] imgs = null;  
-	protected String name = null;
-	protected ImageIcon imgicon = null,rollicon=null,pressedicon=null;
-	
-	static 
-	{
-		imgs = new Image []
-				{
-				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_exit1.png")),
+@SuppressWarnings("serial")
+public class GameButton extends JButton {
+	private static Toolkit tk = Toolkit.getDefaultToolkit();
+	private static Map<String, Image> obj_imgs = new HashMap<String, Image>();
+	static {
+		Image[] imgs = new Image[] { tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_exit1.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_exit2.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_exit3.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_restart1.png")),
@@ -35,8 +26,7 @@ public class GameButton extends JButton
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_restart3.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_start1.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_start2.png")),
-				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_start3.png")),
-				};
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_start3.png")), };
 		obj_imgs.put("BE1", imgs[0]);
 		obj_imgs.put("BE2", imgs[1]);
 		obj_imgs.put("BE3", imgs[2]);
@@ -48,29 +38,19 @@ public class GameButton extends JButton
 		obj_imgs.put("BS3", imgs[8]);
 	}
 
-	GameButton(String name)
-	{
-		//属性初始化
-		super();
-		this.name=name;
-		this.gc=gc;
-		
-		//设置个状态显示的图片
-		if(name=="EIXT")
-		{
-			imgicon = new ImageIcon (obj_imgs.get("BE1"));
+	GameButton(String name) {
+		ImageIcon imgicon = null, rollicon = null, pressedicon = null;
+		// 设置个状态显示的图片
+		if (name == "EIXT") {
+			imgicon = new ImageIcon(obj_imgs.get("BE1"));
 			rollicon = new ImageIcon(obj_imgs.get("BE2"));
 			pressedicon = new ImageIcon(obj_imgs.get("BE3"));
-		}
-		else if(name=="RESTART")
-		{
-			imgicon = new ImageIcon (obj_imgs.get("BR1"));
+		} else if (name == "RESTART") {
+			imgicon = new ImageIcon(obj_imgs.get("BR1"));
 			rollicon = new ImageIcon(obj_imgs.get("BR2"));
 			pressedicon = new ImageIcon(obj_imgs.get("BR3"));
-		}
-		else if(name=="START")
-		{
-			imgicon = new ImageIcon (obj_imgs.get("BS1"));
+		} else if (name == "START") {
+			imgicon = new ImageIcon(obj_imgs.get("BS1"));
 			rollicon = new ImageIcon(obj_imgs.get("BS2"));
 			pressedicon = new ImageIcon(obj_imgs.get("BS3"));
 		}
@@ -78,6 +58,13 @@ public class GameButton extends JButton
 		super.setPressedIcon(pressedicon);
 		super.setRolloverIcon(rollicon);
 		
+		//so we have click sound
+		super.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new GameAudio("点击").start();
+				System.out.println("点击！");
+			}
+		});
 	}
-	
+
 }

@@ -13,14 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-
 import assets.MusicName;
-import assets.MusicNameByFunction;
 import main.GameClient;
-import sounds.GameAudio;
-import sounds.Mp3Thread;
 import sounds.SoundManager;
-import ui.Menu.ButtonListener;
 
 public class MainMenuFrame extends JFrame{
 	
@@ -35,6 +30,7 @@ public class MainMenuFrame extends JFrame{
 		this.gc = gc;
 		this.sound_mgr = sound_mgr;
 		setup_frame();
+		sound_mgr.playBGM(MusicName.Ã°ÏÕµº1);
 	}
 	
 	public void addEventListener(EventListener listener) {
@@ -63,20 +59,18 @@ public class MainMenuFrame extends JFrame{
 		play_btn= new GameButton("START");
 		play_btn.setBounds(300,280,224,35);
 		play_btn.setContentAreaFilled(false);
-		play_btn.addActionListener(new GameButtonListener(){
+		play_btn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event) {
-				super.actionPerformed(event);
 				tellEvent(new GameStartedEvent());
 			}
 		});
 		bg_label.add(play_btn);
 		
-		exit_btn= new GameButton("EIXT");
+		exit_btn= new GameButton("EXIT");
 		exit_btn.setBounds(300,330,224,35);
 		exit_btn.setContentAreaFilled(false);
-		exit_btn.addActionListener(new GameButtonListener(){
+		exit_btn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event) {
-				super.actionPerformed(event);
 				System.exit(0);
 			}
 		});
@@ -87,16 +81,5 @@ public class MainMenuFrame extends JFrame{
 		label_t1.setBounds(265,100,300,147);
 		label_t1.setOpaque(false);
 		bg_label.add(label_t1);
-		
-		//bgm1 = new BackGroundMap(2,gc); COMMENTED TO PASS COMPLIATION
-		//bgm2 = new BackGroundMap(3,gc); COMMENTED TO PASS COMPLIATION
-	}
-	
-	private class GameButtonListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e) {
-			new GameAudio("µã»÷").start();
-			System.out.println("µã»÷£¡");
-		}
 	}
 }

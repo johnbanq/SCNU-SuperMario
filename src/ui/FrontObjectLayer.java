@@ -7,13 +7,13 @@ import java.util.List;
 import game.*;
 import main.GameClient;
 
-public class ObjectMap {
+public class FrontObjectLayer {
 	protected int num = 0;
 	protected GameClient gc = null;
 	public List<GameObject> objs = new LinkedList<GameObject>();
 	protected Hero player;
 
-	public ObjectMap(int num, GameClient gc) {
+	public FrontObjectLayer(int num, GameClient gc) {
 		this.gc = gc;
 		this.num = num;
 	}
@@ -87,6 +87,8 @@ public class ObjectMap {
 			objs.add(new Pipe(2725, 316, 14, gc));
 			// 四号地面
 			objs.add(new Grass(2900, 430, 20, 6, gc));
+			//結束城堡
+			//objs.add(new Tower(3100, 300, gc));
 
 			System.out.println("Num 1 地图已经建立（重置）！ ");
 		}
