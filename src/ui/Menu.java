@@ -18,14 +18,14 @@ import main.GameClient;
 import sounds.GameAudio;
 import sounds.Mp3Thread;
 import ui.background.BackGroundImage;
-import ui.background.BackGroundMap;
+import ui.background.BackGroundMap2;
 
 
 public class Menu 
 {
 	protected GameClient gc;
 	protected boolean initialize=false;
-	protected BackGroundMap bgm1 = null,bgm2 = null;
+	protected BackGroundMap2 bgm1 = null,bgm2 = null;
 	protected GameButton b_start=null,b_exit=null,b_restart=null;
 	protected Container c = null;
 	protected JLabel label_t1 = null,label_gameover=null,label_bg=null,label_win=null;
@@ -104,8 +104,8 @@ public class Menu
 		
 		
 		
-		bgm1 = new BackGroundMap(2,gc);
-		bgm2 = new BackGroundMap(3,gc);
+		bgm1 = new BackGroundMap2(BackGroundMap2.BackgroundType.MENU,gc);
+		bgm2 = new BackGroundMap2(BackGroundMap2.BackgroundType.GAME_OVER,gc);
 	}
 	
 	public Menu(GameClient gc)

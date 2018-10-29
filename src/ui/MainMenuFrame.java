@@ -21,7 +21,6 @@ import sounds.GameAudio;
 import sounds.Mp3Thread;
 import sounds.SoundManager;
 import ui.Menu.ButtonListener;
-import ui.background.BackGroundMap;
 
 public class MainMenuFrame extends JFrame{
 	

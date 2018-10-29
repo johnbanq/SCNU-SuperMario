@@ -1,11 +1,9 @@
+/Aduio/
+/Img/
+/Mp3/
+/assets/
 /game/
-/ui/
-/GameClient$MyMonitor.class
-/GameClient$MyMouseListener.class
-/GameClient$PaintThread.class
-/GameClient.class
 /main/
 /sounds/
-/assets/
+/ui/
 /util/
-/background/

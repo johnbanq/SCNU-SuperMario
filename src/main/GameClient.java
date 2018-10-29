@@ -16,7 +16,6 @@ import javax.swing.JLabel;
 import game.*;
 import sounds.GameAudio;
 import ui.*;
-import ui.background.BackGroundMap;
 import ui.background.BackGroundMap2;
 
 public class GameClient extends JFrame // JFrame重画不调用update 方法 双缓冲代码要写到paint中
