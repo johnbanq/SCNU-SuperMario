@@ -6,21 +6,51 @@ import java.util.EnumMap;
 
 public class ImageLoader {
 	//a class to locate the bgm assets
-	private static EnumMap<ImageName,String> paths;
+	private static EnumMap<ImageName,String[]> paths;
 	
 	static {
-		paths = new EnumMap<ImageName,String>(ImageName.class); 
+		paths = new EnumMap<ImageName,String[]>(ImageName.class); 
 		
-		paths.put(ImageName.BOX_V1,"Img/box1.1.png");
-		paths.put(ImageName.BOX_V2,"Img/box1.2.png");
-		paths.put(ImageName.BOX_V3,"Img/box1.3.png");
-		paths.put(ImageName.BOX_V4,"Img/box1.4.png");
+		paths.put(ImageName.BOX,new String[]{
+				"Img/box1.png",
+				"Img/box2.png",
+				"Img/box3.png",
+				"Img/box4.png"
+				}
+		);
+		
+		paths.put(ImageName.BRICK,new String[]{
+				"Img/brick1.png",
+				"Img/brick2.png"
+				}
+		);
+		
+		paths.put(ImageName.FLOWER,new String[]{
+				"Img/flower1.1.png",
+				"Img/flower1.2.png",
+				"Img/flower1.3.png",
+				"Img/flower1.4.png",
+				"Img/flower1.5.png",
+				"Img/flower1.6.png",
+				}
+		);
+
+		paths.put(ImageName.FUNGUS,new String[]{
+				"Img/fungus1.png",
+				"Img/fungus2.png",
+				"Img/fungus3.png"
+				}
+		);
 	}
 	
-	public static Image loadImage(Toolkit tk,ImageName name) {
+	public static Image[] loadImage(Toolkit tk,ImageName name) {
 		try {
-			Image image = tk.getImage(paths.get(name));
-			return image;
+			String[] img_names = paths.get(name);
+			Image[] imgs = new Image[img_names.length];
+			for(int i=0;i<img_names.length;i++){
+				imgs[i] = tk.getImage(img_names[i]);
+			}
+			return imgs;
 		}catch(NullPointerException e) {
 			e.printStackTrace();
 			System.err.println(name.toString()+" is not refering a valid asset!");

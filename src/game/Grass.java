@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.*;
+import ui.background.BackGroundImage;
 import main.GameClient;
 
 public class Grass extends GameObject 
@@ -17,19 +18,19 @@ public class Grass extends GameObject
 	
 	static 
 	{
-		imgs = new Image []
+		Image[] imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_L1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_L2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_R1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_R2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass3.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_soil.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_soil1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_soil2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/grass_soil3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_L1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_L2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_R1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_R2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_soil.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_soil1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_soil2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/grass_soil3.png")),
 				};
 		obj_imgs.put("GL1", imgs[0]);
 		obj_imgs.put("GL2", imgs[1]);

@@ -7,36 +7,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import assets.ImageLoader;
+import assets.ImageName;
 import ui.*;
 import main.GameClient;
+import sounds.GameAudio;
 
 
 public class Fungus extends GameCreature 
 {
 
-
-	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();//这个不能放到父类中
+	private static Image[] frames = ImageLoader.loadImage(tk, ImageName.FUNGUS);
+	
 	protected boolean hit=false;
 	protected int XSPE=2,YSPE=15,yadd=3,xspe=0,ysep=0;
 	private int d_time=1;
 	private boolean initialize = false;
 	
-	static 
-	{
-		imgs = new Image []
-				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/fungus1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/fungus2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/fungus3.png"))
-				};
-		obj_imgs.put("FR1", imgs[0]);
-		obj_imgs.put("FR2", imgs[1]);
-		obj_imgs.put("FS3", imgs[2]);
-	}
-	
-	public Fungus(int x, int y,Dirction move_dir,GameClient gc) {
+	public Fungus(int x, int y,MoveDirection move_dir,GameClient gc) {
 		super(x, y, gc);
-		if(move_dir==Dirction.L) xspe=-XSPE;
+		if(move_dir==MoveDirection.LEFT) xspe=-XSPE;
 		else xspe=XSPE;
 		obj_w=35;
 		obj_h=35;
@@ -49,9 +39,9 @@ public class Fungus extends GameCreature
 		
 		if(initialize==false)
 		{
-			for(int i=0;i<imgs.length;i++)
+			for(int i=0;i<frames.length;i++)
 			{
-				g.drawImage(imgs[i],-200,-200,null);
+				g.drawImage(frames[i],-200,-200,null);
 			}
 			initialize=true;
 		}
@@ -60,12 +50,12 @@ public class Fungus extends GameCreature
 		{
 			if(d_time<=3)
 			{
-				img=obj_imgs.get("FR1");
+				img=frames[0];
 				d_time++;
 			}
 			else if(d_time>3&&d_time<=6)
 			{
-				img=obj_imgs.get("FR2");
+				img=frames[1];
 				if(d_time==6)
 				d_time=1;
 				else 
@@ -75,7 +65,7 @@ public class Fungus extends GameCreature
 		else if(hit==true)
 		{
 			all_h=20;
-			img=obj_imgs.get("FS3");
+			img=frames[2];
 		}
 		g.drawImage(img, getPosX(), getPosY(), null);
 		
@@ -143,7 +133,7 @@ public class Fungus extends GameCreature
 	}
 	
 	protected void action(Hero hero) {
-		super.action();
+		super.doAction();
 		if(touchhero==Action.BUNT)
 		{
 			hero.speed_y=-hero.y_add;

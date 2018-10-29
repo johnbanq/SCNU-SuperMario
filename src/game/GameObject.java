@@ -19,15 +19,14 @@ public class GameObject
 	private Point pos;
 	public int in_x;
 	public int obj_w=28, obj_h=28;//object width and height
+	public int all_w,all_h;
 	public int hasrun_x=0;
-	public int all_w=0;
-	public int all_h=0;
 	
 	public boolean draw = true,available=true;
+	
 	protected static Toolkit tk =Toolkit.getDefaultToolkit();
 	protected static Random random = new Random();
 	protected int ran_num = random.nextInt(10);
-	protected static Image [] imgs = null;
 	protected Action act=Action.UNSTAND,touch=Action.UNTOUCH,touchhero = Action.UNTOUCH;
 	protected Hero player=null;
 	
@@ -57,9 +56,9 @@ public class GameObject
 	protected void setAvailable() 
 	{
 		if(available==false) return;
-		if(getTotalRectangle().intersects(new Rectangle(0,0,GameClient.F_W,GameClient.F_H))==false)
+		if(getTotalRectangle().intersects(new Rectangle(0,0,GameClient.window_width,GameClient.window_height))==false)
 		{
-			if(pos.x<=-GameClient.F_W/2)
+			if(pos.x<=-GameClient.window_width/2)
 			{
 				draw=false;
 				//available=false;
@@ -148,7 +147,7 @@ public class GameObject
 		else return false;
 	}
 	
-	protected void action(){
+	protected void doAction(){
 		
 	}
 

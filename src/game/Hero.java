@@ -10,6 +10,7 @@ import java.util.Map;
 
 import ui.*;
 import main.GameClient;
+import sounds.GameAudio;
 
 
 public class Hero 
@@ -25,9 +26,9 @@ public class Hero
 	public Action act = Action.UNSTAND;
 	public Action touch = Action.STAND;
 	public Action last_t = Action.UNSTAND;
-	protected Dirction add_dir=Dirction.STOP;
-	protected Dirction move_dir=Dirction.STOP;
-	protected Dirction face_dir=Dirction.R;
+	protected MoveDirection add_dir=MoveDirection.STOP;
+	protected MoveDirection move_dir=MoveDirection.STOP;
+	protected MoveDirection face_dir=MoveDirection.RIGHT;
 	private List<GameObject> objs=null;
 	protected static Map<String,Image> hero_img = new HashMap<String,Image>();
 	public boolean big=false;
@@ -114,9 +115,9 @@ public class Hero
 
 	protected void setDir()
 	{
-		if(speed_x>0) move_dir=Dirction.R;
-		if(speed_x<0) move_dir=Dirction.L;
-		if(speed_x==0) move_dir=Dirction.STOP;
+		if(speed_x>0) move_dir=MoveDirection.RIGHT;
+		if(speed_x<0) move_dir=MoveDirection.LEFT;
+		if(speed_x==0) move_dir=MoveDirection.STOP;
 	}
 	
 	protected void setMarch()
@@ -128,7 +129,7 @@ public class Hero
 	
 	protected void setFacedir()
 	{
-		if(add_dir!=Dirction.STOP)
+		if(add_dir!=MoveDirection.STOP)
 		face_dir=this.add_dir;
 	}
 	
@@ -139,17 +140,17 @@ public class Hero
 		if(b_l==false&&b_r==false) 
 		{
 			add=0;
-			add_dir=Dirction.STOP;
+			add_dir=MoveDirection.STOP;
 		}
 		else if(b_l==true) 
 		{
 			add=(-spe_add);
-			add_dir=Dirction.L;
+			add_dir=MoveDirection.LEFT;
 		}
 		else if(b_r==true) 
 		{
 			add=spe_add;
-			add_dir=Dirction.R;
+			add_dir=MoveDirection.RIGHT;
 		}
 		return add;
 	}
@@ -160,8 +161,8 @@ public class Hero
 		int rub = 0;
 		if(speed_x!=0) 
 		{
-			if(move_dir==Dirction.R) rub=(-rub_add);
-			else if(move_dir==Dirction.L) rub=(rub_add);
+			if(move_dir==MoveDirection.RIGHT) rub=(-rub_add);
+			else if(move_dir==MoveDirection.LEFT) rub=(rub_add);
 		}
 		if(touch==Action.LTOUCH||touch==Action.RTOUCH)
 		{
@@ -196,7 +197,7 @@ public class Hero
 	
 	public void move()
 	{
-		if(y>gc.F_H+100) return;
+		if(y>gc.window_height+100) return;
 		xMove();
 		yMove();
 		setHasrun();
@@ -205,7 +206,7 @@ public class Hero
 			if(die_t==0)
 			die();
 		}
-		if(x>gc.F_W&&finish==true)
+		if(x>gc.window_width&&finish==true)
 		{
 			speed_x=0;
 			speed_y=0;

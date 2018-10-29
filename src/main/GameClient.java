@@ -14,127 +14,109 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.*;
+import sounds.GameAudio;
 import ui.*;
+import ui.background.BackGroundMap;
+import ui.background.BackGroundMap2;
 
-public class GameClient extends JFrame //JFrameÖØ»­²»µ÷ÓÃupdate ·½·¨ Ë«»º³å´úÂëÒªĞ´µ½paintÖĞ
+public class GameClient extends JFrame // JFrameÖØ»­²»µ÷ÓÃupdate ·½·¨ Ë«»º³å´úÂëÒªĞ´µ½paintÖĞ
 {
-	
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final static int F_W=800,F_H=600;
+	public final static int window_width = 800, window_height = 600;
 	protected Image offscreen = null;
-	public boolean d_menu=true;
-	public boolean d_game=false;
-	protected boolean initialize=false;
-	
-	Thread paint_thread=null;
-	public Mario player1 = new Mario(100,100,this);
-	BackGroundMap bgmap = new BackGroundMap(1,this);
-	public ObjectMap obj_map = new ObjectMap(1,this);
-	public ImageMap img_map = new ImageMap(1,this);
+	public boolean d_menu = true;
+	public boolean d_game = false;
+	protected boolean initialize = false;
+
+	Thread paint_thread = null;
+	public Mario player1 = new Mario(100, 100, this);
+	BackGroundMap2 bgmap = new BackGroundMap2(BackGroundMap2.BackgroundType.CLOUD_AND_FOREST, this);
+	public ObjectMap obj_map = new ObjectMap(1, this);
+	public ImageMap img_map = new ImageMap(1, this);
 	Menu menu = new Menu(this);
-	public JButton b_start=null;
-	public JButton b_exit=null;
-	public JButton b_restart=null;
-	public JLabel label_t1=null;
-	public JLabel label_bg=null;
-	public JLabel label_gameover=null;
-	public JLabel label_win=null;
-	Graphics offscreen_g=null;
-	
-	GameClient()
-	{
+	public JButton b_start = null;
+	public JButton b_exit = null;
+	public JButton b_restart = null;
+	public JLabel label_t1 = null;
+	public JLabel label_bg = null;
+	public JLabel label_gameover = null;
+	public JLabel label_win = null;
+	Graphics offscreen_g = null;
+
+	GameClient() {
 		super();
-		this.setBounds(0,0,F_W,F_H);
+		this.setBounds(0, 0, window_width, window_height);
 		this.setVisible(true);
 		this.setResizable(false);
-		this.addWindowListener(new MyWindowListener());
+		this.addWindowListener(new CloseWindowListener());
 		this.setLayout(null);
 		this.setBackground(Color.cyan);
-		
+
 	}
-	
-/*	public void update(Graphics g)
-	{
-		
-		
-	}*/
-	
+
 	public void paintComponents(Graphics g) {
 		super.paintComponents(g);
 	}
 
-	public void paint(Graphics g)
-	{
-		//Ë«»º³å×¼±¸
-		if(initialize==false)
-		{
-			if(offscreen == null)
-			{
-				offscreen = this.createImage(F_W,F_H);//ºóÖÃ»º´æ
+	public void paint(Graphics g) {
+		// Ë«»º³å×¼±¸
+		if (initialize == false) {
+			if (offscreen == null) {
+				offscreen = this.createImage(window_width, window_height);// ºóÖÃ»º´æ
 			}
 			offscreen_g = offscreen.getGraphics();
-			initialize=true;
+			initialize = true;
 		}
-		
-		if(player1.live==false&&player1.y>=610)//ÈËÎïÒÑ¾­ËÀÍöÇÒÂäÓÚÆÁÄ»Íâ×ª»»µ½²Ëµ¥½çÃæ
+
+		if (player1.live == false && player1.y >= 610)// ÈËÎïÒÑ¾­ËÀÍöÇÒÂäÓÚÆÁÄ»Íâ×ª»»µ½²Ëµ¥½çÃæ
 		{
-			d_menu=true;
-			d_game=false;
+			d_menu = true;
+			d_game = false;
 		}
-		if(d_menu==true)
-		{
+		if (d_menu == true) {
 			menu.draw(offscreen_g);
-			label_bg.setIcon(new ImageIcon(offscreen));//½«±³¾°Í¼Æ¬·ÅÈë±³¾°LabelÖĞ
-		}
-		else if(d_menu==false)
-		{
+			label_bg.setIcon(new ImageIcon(offscreen));// ½«±³¾°Í¼Æ¬·ÅÈë±³¾°LabelÖĞ
+		} else if (d_menu == false) {
 			b_start.setVisible(false);
 			b_exit.setVisible(false);
 			b_restart.setVisible(false);
 			label_t1.setVisible(false);
 		}
-		if(d_game==true)
-		{
+		if (d_game == true) {
 			bgmap.draw(offscreen_g);
 			img_map.draw(offscreen_g);
 			obj_map.draw(offscreen_g);
 			player1.draw(offscreen_g);
+		} else if (d_game == false) {
+
 		}
-		else if(d_game==false)
-		{
-			
-		}
-		g.drawImage(offscreen,0,0,null);
+		g.drawImage(offscreen, 0, 0, null);
 	}
-	
-	public void launchFrame ()
-	{
+
+	public void launchFrame() {
 		this.setTitle("Super Mario");
 		paint_thread = new Thread(new PaintThread());
 		paint_thread.start();
-		this.addKeyListener(new MyMonitor());
-		this.addMouseListener(new MyMouseListener());
+		this.addKeyListener(new GameKeyListener());
+		this.addMouseListener(new GameMouseListener());
 	}
-	
-	private class MyMonitor extends KeyAdapter
-	{
+
+	private class GameKeyListener extends KeyAdapter {
 
 		public void keyPressed(KeyEvent e) {
 			player1.keyPressed(e);
-			//System.out.println("ok1");
 		}
+
 		public void keyReleased(KeyEvent e) {
 			player1.keyReleased(e);
-			//System.out.println("ok2");
 		}
 	}
-	
-	private class MyMouseListener implements MouseListener
-	{
+
+	private class GameMouseListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent e) {
 		}
@@ -152,15 +134,13 @@ public class GameClient extends JFrame //JFrameÖØ»­²»µ÷ÓÃupdate ·½·¨ Ë«»º³å´úÂëÒ
 		public void mouseExited(MouseEvent e) {
 			new GameAudio("Êó±ê½øÈë").start();
 		}
-		
+
 	}
-	private class PaintThread implements Runnable
-	{
-		public void run()
-		{
-			while(true)
-			{
-				repaint();//ÎªÊ²Ã´´í
+
+	private class PaintThread implements Runnable {
+		public void run() {
+			while (true) {
+				repaint();// ÎªÊ²Ã´´í
 				try {
 					Thread.sleep(49);
 				} catch (InterruptedException e) {
@@ -169,10 +149,8 @@ public class GameClient extends JFrame //JFrameÖØ»­²»µ÷ÓÃupdate ·½·¨ Ë«»º³å´úÂëÒ
 			}
 		}
 	}
-	
-	
-	public static void main(String args[])
-	{
+
+	public static void main(String args[]) {
 		GameClient gc = new GameClient();
 		gc.launchFrame();
 	}

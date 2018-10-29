@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.*;
+import ui.background.BackGroundImage;
 import main.GameClient;
 
 
@@ -18,12 +19,12 @@ public class Pipe extends GameObject
 	
 	static 
 	{
-		imgs = new Image []
+		Image[] imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/pipe2.1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/pipe2.2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/pipe2.3.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/pipe2.4.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/pipe2.1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/pipe2.2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/pipe2.3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/pipe2.4.png")),
 				};
 		obj_imgs.put("P1", imgs[0]);
 		obj_imgs.put("P2", imgs[1]);

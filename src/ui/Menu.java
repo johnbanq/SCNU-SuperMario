@@ -15,7 +15,10 @@ import javax.swing.JLabel;
 
 import assets.MusicName;
 import main.GameClient;
+import sounds.GameAudio;
 import sounds.Mp3Thread;
+import ui.background.BackGroundImage;
+import ui.background.BackGroundMap;
 
 
 public class Menu 
@@ -35,9 +38,74 @@ public class Menu
 	{
 		imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/title1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/title1.png")),
 				};
 		obj_imgs.put("T1", imgs[0]);
+	}
+	
+	private void setup_buttons() {
+		label_bg = new JLabel();
+		label_bg.setBounds(-5,-26,800,600);
+		label_bg.setBackground(Color.blue);
+		label_bg.setVisible(true);
+		label_bg.setOpaque(false);
+		c.add(label_bg);
+		gc.label_bg=this.label_bg;
+		
+		gc.getContentPane().add(label_bg,null);
+		b_start= new GameButton("START");
+		b_start.setBounds(300,280,224,35);
+		b_start.addActionListener(new ButtonListener(this));
+		b_start.setContentAreaFilled(false);
+		label_bg.add(b_start);
+		gc.b_start=this.b_start;
+		b_exit= new GameButton("EIXT");
+		b_exit.setBounds(300,330,224,35);
+		b_exit.addActionListener(new ButtonListener(this));
+		b_exit.setContentAreaFilled(false);
+		label_bg.add(b_exit);
+		
+		gc.b_exit=this.b_exit;
+		b_restart = new GameButton("RESTART");
+		b_restart.setBounds(300,280,224,35);
+		b_restart.addActionListener(new ButtonListener(this));
+		b_restart.setContentAreaFilled(false);
+		label_bg.add(b_restart);
+		gc.b_restart=this.b_restart;
+		b_restart.setVisible(false);
+		
+		//游戏名字文本框
+		label_t1 = new JLabel();
+		label_t1.setIcon(new ImageIcon(obj_imgs.get("T1")));
+		label_t1.setBounds(265,100,300,147);
+		label_t1.setOpaque(false);
+		
+		label_bg.add(label_t1);
+		gc.label_t1=this.label_t1;
+		
+		
+		label_gameover= new JLabel("GAME OVER");
+		label_gameover.setFont(new Font("GAME OVER",Font.BOLD,55));
+		label_gameover.setForeground(Color.red);//设置字体颜色
+		label_gameover.setBounds(255,100,400,200);
+		label_gameover.setOpaque(false);
+		label_gameover.setVisible(false);
+		label_bg.add(label_gameover);
+		gc.label_gameover=this.label_gameover;
+		
+		label_win= new JLabel("YOU WIN");
+		label_win.setFont(new Font("YOU WIN",Font.BOLD,55));
+		label_win.setForeground(Color.red);//设置字体颜色
+		label_win.setBounds(285,130,300,150);
+		label_win.setOpaque(false);
+		label_win.setVisible(false);
+		label_bg.add(label_win);
+		gc.label_win=this.label_win;
+		
+		
+		
+		bgm1 = new BackGroundMap(2,gc);
+		bgm2 = new BackGroundMap(3,gc);
 	}
 	
 	public Menu(GameClient gc)
@@ -48,8 +116,7 @@ public class Menu
 	
 	public void draw(Graphics g)
 	{
-		if(initialize==true)
-		{
+		if(initialize==true){
 			if(gc.player1.live==true)
 			{
 				//一开始进入游戏时的主菜单的背景
@@ -93,8 +160,6 @@ public class Menu
 		if(initialize==true&&gc.d_game==false&&gc.d_menu==true&&gc.player1.live==false&&gc.player1.finish==false)//在人物死亡时的菜单
 		{
 			//背景音乐处理
-			
-			
 			b_exit.setVisible(true);
 			b_restart.setVisible(true);
 			label_gameover.setVisible(true);
@@ -103,8 +168,6 @@ public class Menu
 		else if(initialize==true&&gc.d_game==false&&gc.d_menu==true&&gc.player1.live==false&&gc.player1.finish==true)//在人物死亡时的菜单
 		{
 			//背景音乐处理
-			
-			
 			b_exit.setVisible(true);
 			b_restart.setVisible(true);
 			label_win.setVisible(true);
@@ -117,68 +180,7 @@ public class Menu
 			//开始 退出 重新游戏按钮设置
 			c=gc.getContentPane();
 			
-			label_bg = new JLabel();
-			label_bg.setBounds(-5,-26,800,600);
-			label_bg.setBackground(Color.blue);
-			label_bg.setVisible(true);
-			label_bg.setOpaque(false);
-			c.add(label_bg);
-			gc.label_bg=this.label_bg;
-			
-			gc.getContentPane().add(label_bg,null);
-			b_start= new GameButton("START");
-			b_start.setBounds(300,280,224,35);
-			b_start.addActionListener(new ButtonListener(this));
-			b_start.setContentAreaFilled(false);
-			label_bg.add(b_start);
-			gc.b_start=this.b_start;
-			b_exit= new GameButton("EIXT");
-			b_exit.setBounds(300,330,224,35);
-			b_exit.addActionListener(new ButtonListener(this));
-			b_exit.setContentAreaFilled(false);
-			label_bg.add(b_exit);
-			
-			gc.b_exit=this.b_exit;
-			b_restart = new GameButton("RESTART");
-			b_restart.setBounds(300,280,224,35);
-			b_restart.addActionListener(new ButtonListener(this));
-			b_restart.setContentAreaFilled(false);
-			label_bg.add(b_restart);
-			gc.b_restart=this.b_restart;
-			b_restart.setVisible(false);
-			
-			//游戏名字文本框
-			label_t1 = new JLabel();
-			label_t1.setIcon(new ImageIcon(obj_imgs.get("T1")));
-			label_t1.setBounds(265,100,300,147);
-			label_t1.setOpaque(false);
-			
-			label_bg.add(label_t1);
-			gc.label_t1=this.label_t1;
-			
-			
-			label_gameover= new JLabel("GAME OVER");
-			label_gameover.setFont(new Font("GAME OVER",Font.BOLD,55));
-			label_gameover.setForeground(Color.red);//设置字体颜色
-			label_gameover.setBounds(255,100,400,200);
-			label_gameover.setOpaque(false);
-			label_gameover.setVisible(false);
-			label_bg.add(label_gameover);
-			gc.label_gameover=this.label_gameover;
-			
-			label_win= new JLabel("YOU WIN");
-			label_win.setFont(new Font("YOU WIN",Font.BOLD,55));
-			label_win.setForeground(Color.red);//设置字体颜色
-			label_win.setBounds(285,130,300,150);
-			label_win.setOpaque(false);
-			label_win.setVisible(false);
-			label_bg.add(label_win);
-			gc.label_win=this.label_win;
-			
-			
-			
-			bgm1 = new BackGroundMap(2,gc);
-			bgm2 = new BackGroundMap(3,gc);
+			setup_buttons();
 			initialize=true;
 			
 			//背景音乐播放
@@ -191,8 +193,7 @@ public class Menu
 		}
 
 		
-	}
-	private class ButtonListener implements ActionListener
+	}	public class ButtonListener implements ActionListener
 	{
 
 		GameClient gc =null;

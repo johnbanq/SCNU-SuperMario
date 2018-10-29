@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.*;
+import ui.background.BackGroundImage;
 import main.GameClient;
+import sounds.GameAudio;
 
 public class Mushroom extends GameCreature
 {
@@ -38,11 +40,11 @@ public class Mushroom extends GameCreature
 	}
 	static 
 	{
-		imgs = new Image []
+		Image[] imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/mushroom1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/mushroom2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/mushroom3.png"))
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/mushroom1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/mushroom2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/mushroom3.png"))
 				};
 		obj_imgs.put("M1", imgs[0]);
 		obj_imgs.put("M2", imgs[1]);
@@ -115,8 +117,8 @@ public class Mushroom extends GameCreature
 		setPosY(getPosY() + yspe);
 	}
 	
-	protected void action() {
-		super.action();
+	protected void doAction() {
+		super.doAction();
 		if(touch==Action.BUNT)
 		{
 			disappear();
@@ -147,13 +149,13 @@ public class Mushroom extends GameCreature
 		{
 			touch=Action.UNTOUCH;
 		}
-		action();
+		doAction();
 	}
 	
 	protected void setAvailable() 
 	{
 		if(available==false) return;
-		if((in_x+all_w>=hasrun_x-GameClient.F_W/2))
+		if((in_x+all_w>=hasrun_x-GameClient.window_width/2))
 		{
 			if(box.touch==Action.BUNT)
 			{

@@ -7,26 +7,31 @@ import java.util.Map;
 import assets.ImageLoader;
 import assets.ImageName;
 import ui.*;
+import util.FrameSequence;
 import main.GameClient;
+import sounds.GameAudio;
 
 
 public class Box extends GameObject 
 {
-
+	private static Image[] imgs = ImageLoader.loadImage(tk,ImageName.BOX);
+	private FrameSequence frame_seq = new FrameSequence(
+			new Image[] {
+					imgs[0],
+					imgs[0],
+					imgs[1],
+					imgs[1],
+					imgs[2],
+					imgs[2],
+					imgs[3],
+					imgs[3]
+			}
+	);
+	
 	protected static final int Y_SPE=10,G_ADD=3;
 	protected int yspe=0,in_y=0;
-	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();
-	protected int d_time=1;
 	protected Mushroom mush = null;
 	
-	static 
-	{
-		obj_imgs.put("B1", ImageLoader.loadImage(tk,ImageName.BOX_V1));
-		obj_imgs.put("B2", ImageLoader.loadImage(tk,ImageName.BOX_V2));
-		obj_imgs.put("B3", ImageLoader.loadImage(tk,ImageName.BOX_V3));
-		obj_imgs.put("B4", ImageLoader.loadImage(tk,ImageName.BOX_V4));
-	}
-
 	public Box(int x, int y, GameClient gc) {
 		super(x, y, gc);
 		in_y=y;
@@ -39,27 +44,7 @@ public class Box extends GameObject
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		Image img = null;
-		if(d_time<=2)
-		{
-			img=obj_imgs.get("B1");
-			d_time++;
-		}
-		else if(d_time>2&&d_time<=4)
-		{
-			img=obj_imgs.get("B2");
-			d_time++;
-		}
-		else if(d_time>4&&d_time<=6)
-		{
-			img=obj_imgs.get("B3");
-			d_time++;
-		}
-		else if(d_time>6&&d_time<=8)
-		{
-			img=obj_imgs.get("B4");
-			d_time=1;
-		}
+		Image img = frame_seq.currentFrameAndNext();
 		g.drawImage(img, getPosX(), getPosY(), null);
 		if(mush!=null)
 			mush.draw(g);
@@ -79,12 +64,13 @@ public class Box extends GameObject
 		{
 			touch=Action.UNTOUCH;
 		}
-		action();
+		doAction();
 	}
 	
-	protected void action()
-	{
-		super.action();
+	protected void doAction(){
+		super.doAction();
+		if(touch!=Action.UNTOUCH)
+			System.out.println(touch.toString());
 		if(touch==Action.BUNT)
 		{
 			yspe=-Y_SPE;

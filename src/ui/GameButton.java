@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import main.GameClient;
+import ui.background.BackGroundImage;
 
 
 public class GameButton extends JButton
@@ -26,15 +27,15 @@ public class GameButton extends JButton
 	{
 		imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_exit1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_exit2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_exit3.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_restart1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_restart2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_restart3.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_start1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_start2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/b_start3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_exit1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_exit2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_exit3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_restart1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_restart2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_restart3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_start1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_start2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/b_start3.png")),
 				};
 		obj_imgs.put("BE1", imgs[0]);
 		obj_imgs.put("BE2", imgs[1]);
@@ -78,6 +79,5 @@ public class GameButton extends JButton
 		super.setRolloverIcon(rollicon);
 		
 	}
-	
 	
 }

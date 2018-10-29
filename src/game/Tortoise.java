@@ -6,13 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.*;
+import ui.background.BackGroundImage;
 import main.GameClient;
+import sounds.GameAudio;
 
 public class Tortoise extends GameCreature 
 {
-	
+	private static Image[] imgs;
 	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();//这个不能放到父类中
-	protected Dirction dir= Dirction.L;
+	protected MoveDirection dir= MoveDirection.LEFT;
 	protected boolean hit=false;
 	protected int XSPE=2,YSPE,xspe,yspe,d_time=1,yadd=3,hit_time=0;
 	protected boolean initialize=false;
@@ -21,14 +23,14 @@ public class Tortoise extends GameCreature
 	{
 		imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/Ltortoise1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/Ltortoise2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/shell1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/shell2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/shell3.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/shell4.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/Rtortoise1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/Rtortoise2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/Ltortoise1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/Ltortoise2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/shell1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/shell2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/shell3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/shell4.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/Rtortoise1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/Rtortoise2.png")),
 				};
 		obj_imgs.put("LT1", imgs[0]);
 		obj_imgs.put("LT2", imgs[1]);
@@ -40,10 +42,10 @@ public class Tortoise extends GameCreature
 		obj_imgs.put("RT2", imgs[7]);
 	}
 
-	public Tortoise(int x, int y,Dirction move_dir, GameClient gc) 
+	public Tortoise(int x, int y,MoveDirection move_dir, GameClient gc) 
 	{
 		super(x, y, gc);
-		if(move_dir==Dirction.L) xspe=-XSPE;
+		if(move_dir==MoveDirection.LEFT) xspe=-XSPE;
 		else xspe=XSPE;
 		obj_w=28;
 		obj_h=37;
@@ -65,7 +67,7 @@ public class Tortoise extends GameCreature
 		Image img = null;
 		if(hit==false)
 		{
-			if(dir==Dirction.L)
+			if(dir==MoveDirection.LEFT)
 			{
 				if(d_time<=3)
 				{
@@ -81,7 +83,7 @@ public class Tortoise extends GameCreature
 					d_time++;
 				}
 			}
-			else if(dir==Dirction.R)
+			else if(dir==MoveDirection.RIGHT)
 			{
 				if(d_time<=3)
 				{
@@ -155,8 +157,8 @@ public class Tortoise extends GameCreature
 	
 	protected void setDir()
 	{
-		if(xspe>=0) dir=Dirction.R;
-		else dir=Dirction.L;
+		if(xspe>=0) dir=MoveDirection.RIGHT;
+		else dir=MoveDirection.LEFT;
 	}
 
 	protected void xMove() {
@@ -211,7 +213,7 @@ public class Tortoise extends GameCreature
 	}
 
 	protected void action(Hero hero) {
-		super.action();
+		super.doAction();
 		if(touchhero==Action.BUNT)
 		{
 			hit_time++;

@@ -1,4 +1,4 @@
-package ui;
+package sounds;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,7 +14,6 @@ public class GameAudio
 	protected InputStream in ;
 	protected AudioStream as ;
 	protected ContinuousAudioDataStream cas ;
-	protected AudioData data=null;
 	
 	public GameAudio(String name)
 	{
@@ -54,12 +53,11 @@ public class GameAudio
 	public void continuousPlay()
 	{
 		try {
-			data = as.getData();
+			cas = new ContinuousAudioDataStream(as.getData());
+			AudioPlayer.player.start(cas);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		cas = new ContinuousAudioDataStream(data);
-		AudioPlayer.player.start(cas);
 	}
 	
 	public void continuousStop()

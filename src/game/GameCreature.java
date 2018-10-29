@@ -35,11 +35,11 @@ public class GameCreature extends GameObject
 	protected void setAvailable() 
 	{
 		if(available==false) return;
-		if(getTotalRectangle().intersects(new Rectangle(0,0,GameClient.F_W,GameClient.F_H)))
+		if(getTotalRectangle().intersects(new Rectangle(0,0,GameClient.window_width,GameClient.window_height)))
 		{
 			this.draw=true;
 		}
-		else if(getPos().x<=-GameClient.F_W/2)
+		else if(getPos().x<=-GameClient.window_width/2)
 		{
 			draw=false;
 			available=false;
@@ -77,9 +77,9 @@ public class GameCreature extends GameObject
 		super.touchWithHero(hero);
 	}
 	
-	protected void action()
+	protected void doAction()
 	{
-		super.action();
+		super.doAction();
 	}
 	
 	public void setObjs(List<GameObject> objs) {

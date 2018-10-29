@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.*;
+import ui.background.BackGroundImage;
 import main.GameClient;
 
 
@@ -21,14 +22,14 @@ public class Chomper extends GameCreature
 	
 	static 
 	{
-		imgs = new Image []
+		Image[] imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/flower1.1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/flower1.2.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/flower1.3.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/flower1.4.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/flower1.5.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/flower1.6.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/flower1.1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/flower1.2.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/flower1.3.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/flower1.4.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/flower1.5.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/flower1.6.png")),
 				};
 		obj_imgs.put("F1", imgs[0]);
 		obj_imgs.put("F2", imgs[1]);
@@ -187,11 +188,10 @@ public class Chomper extends GameCreature
 	}
 	
 	protected void action(Hero hero) {
-		super.action();
+		super.doAction();
 		if(touch==Action.BUNT)
 		{
 			hero.die();
 		}
-	}
-	
+	}	
 }

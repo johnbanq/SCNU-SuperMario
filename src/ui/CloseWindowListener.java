@@ -3,16 +3,13 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 
-public class MyWindowListener implements WindowListener 
+public class CloseWindowListener implements WindowListener 
 {
 
 	public void windowOpened(WindowEvent e) {
 		
 	}
 	
-	
-	
-
 	public void windowClosing(WindowEvent e) {
 		System.exit(0);
 	}

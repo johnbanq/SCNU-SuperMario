@@ -3,35 +3,28 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.util.HashMap;
-import java.util.Map;
 
-import ui.*;
+import assets.ImageLoader;
+import assets.ImageName;
 import main.GameClient;
 
 public class Brick extends GameObject 
 {
-
-	protected int b_w,b_h;
-	protected static Map<String,Image> obj_imgs =  new HashMap<String,Image>();
-	protected String name=null;
-	static 
-	{
-		imgs = new Image []
-				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/brick1.png")),
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/brick2.png")),
-				};
-		obj_imgs.put("B1", imgs[0]);
-		obj_imgs.put("B2", imgs[1]);
-
+	public enum VariantType{
+		V1,V2
 	}
-	public Brick(int x, int y, int b_w, int b_h,String name,GameClient gc) 
+	
+	private static Image[] imgs = ImageLoader.loadImage(tk, ImageName.BRICK);
+	
+	private final int b_w,b_h;
+	private final VariantType type;
+	
+	public Brick(int x, int y, int b_w, int b_h,VariantType type,GameClient gc) 
 	{
 		super(x, y, gc);
 		this.b_w=b_w;
 		this.b_h=b_h;
-		this.name=name;
+		this.type=type;
 		all_w=obj_w*b_w;
 		all_h=obj_h*b_h;
 		obj_w=30;
@@ -53,7 +46,7 @@ public class Brick extends GameObject
 		{
 			for(int h = 1; h<=b_h;h++)
 			{
-				img=obj_imgs.get(name);
+				img=imgs[type.ordinal()];
 				g.drawImage(img,getPosX()+(w-1)*obj_w,getPosY()+(h-1)*obj_h,null);
 			}
 		}

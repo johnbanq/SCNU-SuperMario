@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.*;
+import ui.background.BackGroundImage;
 import main.GameClient;
 
 public class Tower extends GameObject 
@@ -13,9 +14,9 @@ public class Tower extends GameObject
 	
 	static 
 	{
-		imgs = new Image []
+		Image[] imgs = new Image []
 				{
-				tk.getImage(BackGround.class.getClassLoader().getResource("Img/tower1.png")),
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/tower1.png")),
 				};
 		obj_imgs.put("T1", imgs[0]);
 	}
@@ -50,6 +51,6 @@ public class Tower extends GameObject
 			touchhero=Action.BUNT;
 			System.out.println("Tower touch hero!");
 		}
-		action();
+		doAction();
 	}
 }

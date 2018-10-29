@@ -145,14 +145,14 @@ public class Mario extends Hero
 		{
 			if(act==Action.STAND)
 			{
-				if(move_dir==Dirction.STOP)
+				if(move_dir==MoveDirection.STOP)
 				{
-					if(face_dir==Dirction.R)
+					if(face_dir==MoveDirection.RIGHT)
 					g.drawImage(hero_img.get("RR0"),x,y,null);
-					else if(face_dir==Dirction.L)
+					else if(face_dir==MoveDirection.LEFT)
 					g.drawImage(hero_img.get("LR0"),x,y,null);
 				}
-				else if(move_dir==Dirction.L)
+				else if(move_dir==MoveDirection.LEFT)
 				{
 					if(march==true) 
 						{
@@ -179,7 +179,7 @@ public class Mario extends Hero
 						g.drawImage(hero_img.get("SR"),x,y,null);
 					}
 				}
-				else if(move_dir==Dirction.R)
+				else if(move_dir==MoveDirection.RIGHT)
 				{
 					if(march==true) 
 					{
@@ -210,7 +210,7 @@ public class Mario extends Hero
 			}
 			else if(act==Action.UNSTAND)
 			{
-				if(move_dir==Dirction.L)
+				if(move_dir==MoveDirection.LEFT)
 				{
 					if(speed_y<0)
 					{
@@ -222,7 +222,7 @@ public class Mario extends Hero
 					}
 					
 				}
-				else if(move_dir==Dirction.R)
+				else if(move_dir==MoveDirection.RIGHT)
 				{
 					if(speed_y<0)
 					{
@@ -233,11 +233,11 @@ public class Mario extends Hero
 						g.drawImage(hero_img.get("RJ2"),x,y,null);
 					}
 				}
-				else if(move_dir==Dirction.STOP)
+				else if(move_dir==MoveDirection.STOP)
 				{
-					if(face_dir==Dirction.R)
+					if(face_dir==MoveDirection.RIGHT)
 					g.drawImage(hero_img.get("RJ1"),x,y,null);
-					else if(face_dir==Dirction.L)
+					else if(face_dir==MoveDirection.LEFT)
 					g.drawImage(hero_img.get("LJ1"),x,y,null);
 				}
 			}
@@ -246,14 +246,14 @@ public class Mario extends Hero
 		{
 			if(act==Action.STAND)
 			{
-				if(move_dir==Dirction.STOP)
+				if(move_dir==MoveDirection.STOP)
 				{
-					if(face_dir==Dirction.R)
+					if(face_dir==MoveDirection.RIGHT)
 					g.drawImage(hero_img.get("SRS"),x,y,null);
-					else if(face_dir==Dirction.L)
+					else if(face_dir==MoveDirection.LEFT)
 					g.drawImage(hero_img.get("SLS"),x,y,null);
 				}
-				else if(move_dir==Dirction.L)
+				else if(move_dir==MoveDirection.LEFT)
 				{
 					if(march==true) 
 						{
@@ -280,7 +280,7 @@ public class Mario extends Hero
 						g.drawImage(hero_img.get("SLSP"),x,y,null);
 					}
 				}
-				else if(move_dir==Dirction.R)
+				else if(move_dir==MoveDirection.RIGHT)
 				{
 					if(march==true) 
 					{
@@ -311,7 +311,7 @@ public class Mario extends Hero
 			}
 			else if(act==Action.UNSTAND)
 			{
-				if(move_dir==Dirction.L)
+				if(move_dir==MoveDirection.LEFT)
 				{
 					if(speed_y<0)
 					{
@@ -323,7 +323,7 @@ public class Mario extends Hero
 					}
 					
 				}
-				else if(move_dir==Dirction.R)
+				else if(move_dir==MoveDirection.RIGHT)
 				{
 					if(speed_y<0)
 					{
@@ -334,11 +334,11 @@ public class Mario extends Hero
 						g.drawImage(hero_img.get("SRJ2"),x,y,null);
 					}
 				}
-				else if(move_dir==Dirction.STOP)
+				else if(move_dir==MoveDirection.STOP)
 				{
-					if(face_dir==Dirction.R)
+					if(face_dir==MoveDirection.RIGHT)
 					g.drawImage(hero_img.get("SRJ1"),x,y,null);
-					else if(face_dir==Dirction.L)
+					else if(face_dir==MoveDirection.LEFT)
 					g.drawImage(hero_img.get("SLJ1"),x,y,null);
 				}
 			}
