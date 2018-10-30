@@ -21,17 +21,17 @@ public class Mushroom extends GameCreature
 	protected int XSPE=3,YSPE=15,yadd=3,xspe=-3;
 //	protected boolean draw=false;
 	
-	Mushroom(int x, int y, GameClient gc) 
+	Mushroom(int x, int y, GamePanel panel) 
 	{
-		super(x, y, gc);
+		super(x, y, panel);
 		obj_w=23;
 		obj_h=25;
 		all_w=23;
 		all_h=25;
 	}
-	Mushroom(int x, int y,Box box ,GameClient gc) 
+	Mushroom(int x, int y,Box box ,GamePanel panel) 
 	{
-		super(x, y, gc);
+		super(x, y, panel);
 		obj_w=23;
 		obj_h=25;
 		all_w=23;
@@ -82,7 +82,7 @@ public class Mushroom extends GameCreature
 		g.setColor(c);
 		
 		touchWithObjs();
-//		touchWithHero(gc.player1);
+//		touchWithHero(panel.player1);
 //		action();
 //		move();
 	}
@@ -129,7 +129,7 @@ public class Mushroom extends GameCreature
 	{
 		
 		if(draw==false) return;
-		gc.player1.big=true;
+		panel.player1.big=true;
 		
 		//嚼东西音效
 		new GameAudio("嚼东西").start();

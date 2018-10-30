@@ -78,8 +78,8 @@ public class Mario extends Hero
 		hero_img.put("BD", imgs[24]);
 		hero_img.put("SD", imgs[25]);
 	}
-	public Mario(int x, int y,GameClient gc) {
-		super(x, y,gc);
+	public Mario(int x, int y,GamePanel gp) {
+		super(x, y,gp);
 		w1=hero_w;
 		h1=hero_h;
 	}

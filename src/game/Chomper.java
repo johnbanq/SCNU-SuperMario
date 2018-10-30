@@ -39,9 +39,9 @@ public class Chomper extends GameCreature
 		obj_imgs.put("F6", imgs[5]);
 	}
 	
-	public Chomper(int x,int y,String ground ,GameClient gc)
+	public Chomper(int x,int y,String ground ,GamePanel panel)
 	{
-		super(x,y,gc);
+		super(x,y,panel);
 		this.ground=ground;
 		obj_h=58;
 		obj_w=30;
@@ -50,9 +50,9 @@ public class Chomper extends GameCreature
 		in_y=y;
 	}
 	
-	Chomper(int x,int y,String ground,Pipe p,GameClient gc)
+	Chomper(int x,int y,String ground,Pipe p,GamePanel panel)
 	{
-		super(x,y,gc);
+		super(x,y,panel);
 		this.p=p;
 		this.ground=ground;
 		obj_h=58;
@@ -112,7 +112,7 @@ public class Chomper extends GameCreature
 		g.fillOval(getPosX(),getPosY()+all_h,5,5);
 		g.setColor(c);
 		
-//		touchWithHero(gc.player1);
+//		touchWithHero(panel.player1);
 //		move();
 		
 /*		if(ground=="Pipe")
@@ -184,7 +184,7 @@ public class Chomper extends GameCreature
 		{
 			touch=Action.UNTOUCH;
 		}
-		action(gc.player1);
+		action(panel.player1);
 	}
 	
 	protected void action(Hero hero) {

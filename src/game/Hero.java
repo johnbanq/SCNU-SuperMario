@@ -32,13 +32,13 @@ public class Hero
 	private List<GameObject> objs=null;
 	protected static Map<String,Image> hero_img = new HashMap<String,Image>();
 	public boolean big=false;
-	protected GameClient gc=null;
+	protected GamePanel panel=null;
 	
-	public Hero(int x, int y,GameClient gc) 
+	public Hero(int x, int y,GamePanel panel) 
 	{
 		this.x = x;
 		this.y = y;
-		this.gc = gc;
+		this.panel = panel;
 	}
 	
 	public void draw(Graphics g)
@@ -53,7 +53,7 @@ public class Hero
 		if(this.live==true)
 		{
 			this.setMarch();
-			setObjs(gc.obj_map.objs);
+			setObjs(panel.getObjectLayer().objs);
 			touchWithObjs();
 		}
 	}
@@ -70,10 +70,10 @@ public class Hero
 		this.objs = objs;
 	}
 	
-	public void keyPressed(KeyEvent e) 
-	{
+	public void keyPressed(KeyEvent e) {
 		if(live==false||finish==true) return;
 		int key=e.getKeyCode();
+		System.out.println(key);
 		if(key==KeyEvent.VK_LEFT) b_l=true;
 		else if (key==KeyEvent.VK_UP) b_u=true;
 		else if (key==KeyEvent.VK_RIGHT) b_r=true;
@@ -197,7 +197,7 @@ public class Hero
 	
 	public void move()
 	{
-		if(y>gc.window_height+100) return;
+		if(y>panel.window_height+100) return;
 		xMove();
 		yMove();
 		setHasrun();
@@ -206,13 +206,13 @@ public class Hero
 			if(die_t==0)
 			die();
 		}
-		if(x>gc.window_width&&finish==true)
+		if(x>panel.window_width&&finish==true)
 		{
 			speed_x=0;
 			speed_y=0;
 			live=false;
-			gc.d_game=false;
-			gc.d_menu=true;
+			//panel.d_game=false;
+			//panel.d_menu=true;
 		}
 	}
 	

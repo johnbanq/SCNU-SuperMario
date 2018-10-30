@@ -18,15 +18,15 @@ import javax.swing.JPanel;
 
 import main.GameClient;
 import ui.background.BackGroundImage;
-import ui.background.BackGroundLayer;
+import ui.events.GameStartEvent;
+import ui.layers.BackGroundLayer;
 
 @SuppressWarnings("serial")
-public class MainMenuPanel extends JPanel{
+public class MainMenuPanel extends AbstractGamePanel{
 	
 	private JButton play_btn,exit_btn;
 	private JLabel bg_label,label_t1;
 	private BackGroundLayer bg = new BackGroundLayer(BackGroundLayer.BackgroundType.PLAY_MENU);
-	private GameClient gc;
 	
 	private static Map<String, Image> obj_imgs = new HashMap<String, Image>();
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
@@ -36,39 +36,21 @@ public class MainMenuPanel extends JPanel{
 				};
 		obj_imgs.put("T1", imgs[0]);
 	}
-	
-	private LinkedList<EventListener> listeners = new LinkedList<>();
-	public void addEventListener(EventListener listener) {
-		listeners.addLast(listener);
-	}
-	public void removeEventListener(EventListener listener) {
-		listeners.remove(listener);
-	}
-	private void tellEvent(Event e) {
-		for(EventListener l:listeners) {
-			l.actionPerformed(e);
-		}
-	}
-	
-	public MainMenuPanel(GameClient gc) {
-		this.gc = gc;
-		setup_panel(gc);
-	}
-	
-	public void removeFromGameClient() {
+
+	@Override
+	public void removeFromGameClient(GameClient gc) {
 		gc.remove(bg_label);
 		bg_label.setVisible(false);
 	}
-	
-	private void setup_panel(GameClient gc) {
+	@Override
+	public void addToGameClient(GameClient gc) {
 		
 		bg_label = new JLabel();
 		bg_label.setBounds(-5,-26,800,600);
-		bg_label.setBackground(Color.cyan);
 		bg_label.setVisible(true);
 		bg_label.setOpaque(false);
 		gc.getContentPane().add(bg_label);
-		
+
 		play_btn= new GameButton("START");
 		play_btn.setBounds(300,280,224,35);
 		play_btn.setContentAreaFilled(false);
@@ -94,6 +76,11 @@ public class MainMenuPanel extends JPanel{
 		label_t1.setBounds(265,100,300,147);
 		label_t1.setOpaque(false);
 		bg_label.add(label_t1);
+	}
+	
+	public void paint(Graphics g) {
+		bg.render(g, null);
+		bg_label.paintAll(g);
 	}
 
 }

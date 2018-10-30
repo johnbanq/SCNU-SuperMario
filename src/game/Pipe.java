@@ -33,8 +33,8 @@ public class Pipe extends GameObject
 
 	}
 	
-	public Pipe(int x, int y,int p_h, GameClient gc) {
-		super(x, y, gc);
+	public Pipe(int x, int y,int p_h, GamePanel gp) {
+		super(x, y, gp);
 		this.p_h=p_h;
 		all_w=obj_w*2;
 		all_h=obj_h*p_h;

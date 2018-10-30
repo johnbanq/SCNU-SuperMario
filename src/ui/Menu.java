@@ -19,9 +19,9 @@ import main.GameClient;
 import sounds.GameAudio;
 import sounds.Mp3Thread;
 import ui.background.BackGroundImage;
-import ui.background.BackGroundLayer;
+import ui.layers.BackGroundLayer;
 
-public class Menu {
+/*public class Menu {
 	private GameClient gc;
 	private boolean initialize = false;
 	private BackGroundLayer bgm1 = null, bgm2 = null;
@@ -187,4 +187,4 @@ public class Menu {
 		}
 
 	}
-}
+}*/

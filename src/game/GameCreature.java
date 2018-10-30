@@ -16,20 +16,16 @@ public class GameCreature extends GameObject
 	
 	public boolean draw = false;
 	
-	GameCreature(int x,int y,GameClient gc)
+	GameCreature(int x,int y,GamePanel panel)
 	{
-		super(x,y,gc);
+		super(x,y,panel);
+		setObjs(panel.getObjectLayer().objs);
 	}
 	
 	public void draw(Graphics g)
 	{
-		setObjs(gc.obj_map.objs);
+		setObjs(panel.getObjectLayer().objs);
 		super.draw(g);
-//		setAvailable();
-//		getHasrun();
-//		touchWithHero(gc.player1);
-//		move();
-//		action();
 	}
 
 	protected void setAvailable() 

@@ -21,8 +21,8 @@ public class Tower extends GameObject
 		obj_imgs.put("T1", imgs[0]);
 	}
 
-	public Tower(int x, int y, GameClient gc) {
-		super(x, y, gc);
+	public Tower(int x, int y,GamePanel gp) {
+		super(x, y, gp);
 		obj_w=150;
 		obj_h=150;
 		all_w=150;
@@ -32,7 +32,7 @@ public class Tower extends GameObject
 	public void draw(Graphics g) {
 		super.draw(g);
 		g.drawImage(obj_imgs.get("T1"),getPosX(),getPosY(),null);
-		touchWithHero(gc.player1);
+		touchWithHero(panel.player1);
 	}
 
 	protected void action(Hero hero) 

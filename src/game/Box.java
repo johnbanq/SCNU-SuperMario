@@ -32,8 +32,8 @@ public class Box extends GameObject
 	protected int yspe=0,in_y=0;
 	protected Mushroom mush = null;
 	
-	public Box(int x, int y, GameClient gc) {
-		super(x, y, gc);
+	public Box(int x, int y, GamePanel gp) {
+		super(x, y, gp);
 		in_y=y;
 		obj_w=30;
 		obj_h=30;
@@ -75,7 +75,7 @@ public class Box extends GameObject
 		{
 			yspe=-Y_SPE;
 			if(mush==null)
-			mush = new Mushroom(getPosX()+obj_w/5,getPosY()-25,this,gc);
+			mush = new Mushroom(getPosX()+obj_w/5,getPosY()-25,this,panel);
 			
 			//×²Ïä×ÓÒôÐ§
 			new GameAudio("×²Ïä×Ó").start();

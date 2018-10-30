@@ -14,7 +14,7 @@ import main.GameClient;
 
 public class GameObject 
 {
-	public GameClient gc=null;
+	public GamePanel panel;
 	
 	private Point pos;
 	public int in_x;
@@ -32,10 +32,10 @@ public class GameObject
 	
 	
 	
-	GameObject(int x,int y,GameClient gc)
+	GameObject(int x,int y,GamePanel panel)
 	{
 		this.pos = new Point(x,y);
-		this.gc=gc;
+		this.panel=panel;
 		all_w=obj_w;
 		all_h=obj_h;
 		in_x=x;
@@ -45,12 +45,12 @@ public class GameObject
 	{
 		setAvailable();
 		getHasrun();
-		touchWithHero(gc.player1);
+		touchWithHero(panel.player1);
 		move();
 	}
 	
 	protected void getHasrun() {
-		this.hasrun_x = gc.player1.hasrun_x;
+		this.hasrun_x = panel.player1.hasrun_x;
 	}
 
 	protected void setAvailable() 
@@ -69,7 +69,7 @@ public class GameObject
 	public void move()
 	{
 		if(available==true)
-			player = gc.player1;
+			player = panel.player1;
 		{
 			if(player.x+player.speed_x>Hero.LIM_X2&&player.finish==false)
 			{

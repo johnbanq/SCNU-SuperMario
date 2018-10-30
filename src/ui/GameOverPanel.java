@@ -2,55 +2,28 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import main.GameClient;
-import ui.Menu.ButtonListener;
-import ui.background.BackGroundImage;
-import ui.background.BackGroundLayer;
+import ui.events.GameRestartEvent;
+import ui.layers.BackGroundLayer;
 
-public class GameOverPanel extends JPanel {
+@SuppressWarnings("serial")
+public class GameOverPanel extends AbstractGamePanel {
 	
-	private GameClient gc;
 	private JButton replay_btn,exit_btn;
 	private JLabel bg_label,gameover_label;
-	private BackGroundLayer bg = new BackGroundLayer(BackGroundLayer.BackgroundType.PLAY_MENU);
+	private BackGroundLayer bg = new BackGroundLayer(BackGroundLayer.BackgroundType.GAME_OVER_MENU);
 	
-	private LinkedList<EventListener> listeners = new LinkedList<>();
-	public void addEventListener(EventListener listener) {
-		listeners.addLast(listener);
-	}
-	public void removeEventListener(EventListener listener) {
-		listeners.remove(listener);
-	}
-	private void tellEvent(Event e) {
-		for(EventListener l:listeners) {
-			l.actionPerformed(e);
-		}
-	}
-	
-	public GameOverPanel(GameClient gc) {
-		this.gc = gc;
-		setup_panel(gc);
-	}
-	
-	public void removeFromGameClient() {
+	public void removeFromGameClient(GameClient gc) {
 		gc.remove(bg_label);
 		bg_label.setVisible(false);
 	}
 	
-	private void setup_panel(GameClient gc) {
+	public void addToGameClient(GameClient gc) {
 		
 		bg_label = new JLabel();
 		bg_label.setBounds(-5, -26, 800, 600);
@@ -64,7 +37,6 @@ public class GameOverPanel extends JPanel {
 		gameover_label.setForeground(Color.red);// …Ë÷√◊÷ÃÂ—’…´
 		gameover_label.setBounds(255, 100, 400, 200);
 		gameover_label.setOpaque(false);
-		gameover_label.setVisible(false);
 		bg_label.add(gameover_label);
 
 		replay_btn = new GameButton("RESTART");
@@ -87,6 +59,11 @@ public class GameOverPanel extends JPanel {
 		});
 		bg_label.add(exit_btn);
 	
+	}
+	
+	public void paint(Graphics g) {
+		bg.render(g, null);
+		bg_label.paint(g);
 	}
 
 }

@@ -42,9 +42,9 @@ public class Tortoise extends GameCreature
 		obj_imgs.put("RT2", imgs[7]);
 	}
 
-	public Tortoise(int x, int y,MoveDirection move_dir, GameClient gc) 
+	public Tortoise(int x, int y,MoveDirection move_dir, GamePanel panel) 
 	{
-		super(x, y, gc);
+		super(x, y, panel);
 		if(move_dir==MoveDirection.LEFT) xspe=-XSPE;
 		else xspe=XSPE;
 		obj_w=28;
@@ -143,7 +143,7 @@ public class Tortoise extends GameCreature
 		g.fillOval(getPosX(),getPosY()+all_h,5,5);
 		g.setColor(c);
 		
-//		touchWithHero(gc.player1);
+//		touchWithHero(panel.player1);
 		touchWithObjs();
 //		move();
 
@@ -209,7 +209,7 @@ public class Tortoise extends GameCreature
 			touchhero=Action.UNTOUCH;
 		}
 //		System.out.println("TO touchhero "+touchhero);
-		action(gc.player1); 
+		action(panel.player1); 
 	}
 
 	protected void action(Hero hero) {

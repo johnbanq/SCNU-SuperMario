@@ -24,8 +24,8 @@ public class Fungus extends GameCreature
 	private int d_time=1;
 	private boolean initialize = false;
 	
-	public Fungus(int x, int y,MoveDirection move_dir,GameClient gc) {
-		super(x, y, gc);
+	public Fungus(int x, int y,MoveDirection move_dir,GamePanel panel) {
+		super(x, y, panel);
 		if(move_dir==MoveDirection.LEFT) xspe=-XSPE;
 		else xspe=XSPE;
 		obj_w=35;
@@ -129,7 +129,7 @@ public class Fungus extends GameCreature
 		{
 			touchhero=Action.UNTOUCH;
 		}
-		action(gc.player1);
+		action(panel.player1);
 	}
 	
 	protected void action(Hero hero) {

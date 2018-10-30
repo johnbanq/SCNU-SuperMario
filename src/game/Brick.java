@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import assets.ImageLoader;
 import assets.ImageName;
 import main.GameClient;
+import ui.GamePanel;
 
 public class Brick extends GameObject 
 {
@@ -19,9 +20,9 @@ public class Brick extends GameObject
 	private final int b_w,b_h;
 	private final VariantType type;
 	
-	public Brick(int x, int y, int b_w, int b_h,VariantType type,GameClient gc) 
+	public Brick(int x, int y, int b_w, int b_h,VariantType type,GamePanel panel) 
 	{
-		super(x, y, gc);
+		super(x, y, panel);
 		this.b_w=b_w;
 		this.b_h=b_h;
 		this.type=type;

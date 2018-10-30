@@ -45,9 +45,9 @@ public class Grass extends GameObject
 		obj_imgs.put("GS3", imgs[10]);
 	}
 	
-	public Grass(int x, int y,int g_w,int g_h , GameClient gc) 
+	public Grass(int x, int y,int g_w,int g_h , GamePanel panel) 
 	{
-		super(x,y,gc);
+		super(x,y,panel);
 		this.g_w=g_w;
 		this.g_h=g_h;
 		all_w=obj_w*g_w;
