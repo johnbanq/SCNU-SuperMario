@@ -6,10 +6,10 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
+import assets.MusicName;
 import ui.*;
 import ui.background.BackGroundImage;
 import main.GameClient;
-import sounds.GameAudio;
 
 public class Mushroom extends GameCreature
 {
@@ -132,7 +132,7 @@ public class Mushroom extends GameCreature
 		panel.player1.big=true;
 		
 		//嚼东西音效
-		new GameAudio("嚼东西").start();
+		panel.getSoundManager().playSound(MusicName.嚼东西);
 		
 		super.disappear();
 	}

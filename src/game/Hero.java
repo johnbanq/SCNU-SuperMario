@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import assets.MusicName;
 import ui.*;
 import main.GameClient;
-import sounds.GameAudio;
 
 
 public class Hero 
@@ -192,7 +192,7 @@ public class Hero
 		act=Action.UNSTAND;
 		
 		//ÌøÔ¾ÉùÒô
-		new GameAudio("Ë®Åİ").start();
+		panel.getSoundManager().playSound(MusicName.Ë®Åİ);
 	}
 	
 	public void move()
@@ -229,7 +229,7 @@ public class Hero
 		System.out.println("die");
 		
 		//Ê§°ÜÒôĞ§
-		new GameAudio("Ê§°Ü").start();
+		panel.getSoundManager().playSound(MusicName.Ê§°Ü);
 	}
 	
 	public void finish()
@@ -240,7 +240,7 @@ public class Hero
 			speed_x=XSPE;
 			
 			//¹ı¹ØÒôĞ§
-			new GameAudio("Çì×£").start();
+			panel.getSoundManager().playSound(MusicName.Çì×£);
 		}
 	}
 	

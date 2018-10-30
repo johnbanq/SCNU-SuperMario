@@ -7,20 +7,27 @@ import java.awt.event.KeyListener;
 
 import game.Mario;
 import main.GameClient;
+import sounds.SoundManager;
 import ui.events.GameOverAndCanShowScreen;
 import ui.events.GameWonAndCanShowScreen;
 import ui.layers.BackGroundLayer;
 import ui.layers.BackObjectLayer;
 import ui.layers.FrontObjectLayer;
 
+@SuppressWarnings("serial")
 public class GamePanel extends AbstractGamePanel {
-	
+
 	public final int window_width = GameClient.window_width,window_height=GameClient.window_height;
 	public Mario player1 = new Mario(100, 100, this);
 	private FrontObjectLayer obj_layer = new FrontObjectLayer(1, this);
 	private BackObjectLayer img_layer = new BackObjectLayer(1, this);
 	private BackGroundLayer bg_layer = new BackGroundLayer(BackGroundLayer.BackgroundType.GAME);
 	private KeyListener listener;
+	
+	
+	public GamePanel(SoundManager sound_mgr) {
+		super(sound_mgr);
+	}
 	
 	@Override
 	public void removeFromGameClient(GameClient gc) {

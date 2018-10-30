@@ -7,6 +7,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
+import assets.MusicName;
+import sounds.SoundManager;
 import ui.*;
 import ui.events.*;
 
@@ -21,6 +23,8 @@ public class GameClient extends JFrame
 	private AbstractGamePanel cur_panel;
 	private Image buffer_img;
 	
+	SoundManager sound_mgr = new SoundManager();
+	
 	GameClient() {
 		//setup the game window
 		this.setTitle("Super Mario");
@@ -34,6 +38,8 @@ public class GameClient extends JFrame
 		});
 		this.setLayout(null);
 		this.setBackground(Color.cyan);
+		
+		switch_to_state(ClientState.MAIN_MENU);
 	}
 
 	public void paint(Graphics g) {
@@ -63,7 +69,6 @@ public class GameClient extends JFrame
 	public static void main(String args[]) {
 		//init the game client
 		GameClient gc = new GameClient();
-		gc.switch_to_state(ClientState.MAIN_MENU);
 		//start painting
 		Thread thread = new Thread(gc.new PaintThread());
 		thread.start();
@@ -85,7 +90,7 @@ public class GameClient extends JFrame
 		}
 		switch(state) {
 		case GAME:
-			cur_panel = new GamePanel();
+			cur_panel = new GamePanel(sound_mgr);
 			cur_panel.addEventListener(new EventListener() {
 				public void actionPerformed(Event event) {
 					if(event instanceof GameOverAndCanShowScreen) {
@@ -93,11 +98,13 @@ public class GameClient extends JFrame
 					}else if(event instanceof GameWonAndCanShowScreen) {
 						switch_to_state(ClientState.GAME_WIN);
 					}
+					sound_mgr.stopBGM();
 				}
 			});
+			sound_mgr.playBGM(MusicName.”Œœ∑BGM);
 			break;
 		case GAME_OVER:
-			cur_panel = new GameOverPanel();
+			cur_panel = new GameOverPanel(sound_mgr);
 			cur_panel.addEventListener(new EventListener() {
 				public void actionPerformed(Event event) {
 					//listen for game restart event
@@ -107,7 +114,7 @@ public class GameClient extends JFrame
 			break;
 		case GAME_WIN:
 			cur_panel.addToGameClient(this);
-			cur_panel = new GameWinPanel(cur_panel);
+			cur_panel = new GameWinPanel(sound_mgr,cur_panel);
 			cur_panel.addEventListener(new EventListener() {
 				public void actionPerformed(Event event) {
 					//listen for game restart event
@@ -116,13 +123,14 @@ public class GameClient extends JFrame
 			});
 			break;
 		case MAIN_MENU:
-			cur_panel = new MainMenuPanel();
+			cur_panel = new MainMenuPanel(sound_mgr);
 			cur_panel.addEventListener(new EventListener() {
 				public void actionPerformed(Event event) {
 					//listen for game start event
 					switch_to_state(ClientState.GAME);
 				}
 			});
+			sound_mgr.playBGM(MusicName.≤Àµ•BGM);
 			break;
 		default:
 			break;

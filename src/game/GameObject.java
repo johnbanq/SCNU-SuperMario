@@ -11,10 +11,12 @@ import game.Action;
 import game.Hero;
 import ui.*;
 import main.GameClient;
+import sounds.SoundManager;
 
 public class GameObject 
 {
 	public GamePanel panel;
+	private SoundManager sound_mgr;
 	
 	private Point pos;
 	public int in_x;
@@ -36,6 +38,7 @@ public class GameObject
 	{
 		this.pos = new Point(x,y);
 		this.panel=panel;
+		this.sound_mgr = panel.getSoundManager();
 		all_w=obj_w;
 		all_h=obj_h;
 		in_x=x;

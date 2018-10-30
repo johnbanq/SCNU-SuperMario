@@ -16,7 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import assets.MusicName;
 import main.GameClient;
+import sounds.SoundManager;
 import ui.background.BackGroundImage;
 import ui.events.GameRestartEvent;
 import ui.layers.BackGroundLayer;
@@ -28,13 +30,15 @@ public class GameWinPanel extends AbstractGamePanel {
 	private JLabel bg_label,win_label;
 	private AbstractGamePanel game_panel;//a small trick to display over it
 	
-	public GameWinPanel(AbstractGamePanel game_panel) {
+	public GameWinPanel(SoundManager sound_mgr,AbstractGamePanel game_panel) {
+		super(sound_mgr);
 		this.game_panel = game_panel;
 	}
 	
 	public void removeFromGameClient(GameClient gc) {
 		gc.remove(bg_label);
 		bg_label.setVisible(false);
+	
 	}
 	
 	public void addToGameClient(GameClient gc) {
@@ -53,7 +57,7 @@ public class GameWinPanel extends AbstractGamePanel {
 		win_label.setOpaque(false);
 		bg_label.add(win_label);
 
-		replay_btn = new GameButton("RESTART");
+		replay_btn = new GameButton("RESTART",getSoundManager());
 		replay_btn.setBounds(300, 280, 224, 35);
 		replay_btn.setContentAreaFilled(false);
 		replay_btn.addActionListener(new ActionListener(){
@@ -63,7 +67,7 @@ public class GameWinPanel extends AbstractGamePanel {
 		});
 		bg_label.add(replay_btn);
 		
-		exit_btn= new GameButton("EXIT");
+		exit_btn= new GameButton("EXIT",getSoundManager());
 		exit_btn.setBounds(300,330,224,35);
 		exit_btn.setContentAreaFilled(false);
 		exit_btn.addActionListener(new ActionListener(){

@@ -11,8 +11,18 @@ public class MusicLoader {
 	
 	static {
 		paths = new EnumMap<MusicName,String>(MusicName.class); 
-		paths.put(MusicName.冒险岛1,"src\\Mp3\\FunnyRabbit.mp3");
-		paths.put(MusicName.冒险岛2,"src\\Mp3\\冒险岛1.mp3");
+		//BGM
+		paths.put(MusicName.菜单BGM,"src\\Mp3\\FunnyRabbit.mp3");
+		paths.put(MusicName.游戏BGM,"src\\Mp3\\冒险岛1.mp3");
+		//Sounds
+		paths.put(MusicName.点击,"src\\Aduio\\点击.wav");
+		paths.put(MusicName.嚼东西,"src\\Aduio\\嚼东西.wav");
+		paths.put(MusicName.水泡,"src\\\\Aduio\\\\水泡.wav");
+		paths.put(MusicName.失败,"src\\Aduio\\失败.wav");
+		paths.put(MusicName.打击,"src\\Aduio\\踩踏.wav");
+		paths.put(MusicName.撞箱子,"src\\Aduio\\撞箱子.wav");
+		paths.put(MusicName.庆祝,"src\\Aduio\\庆祝.wav");
+		paths.put(MusicName.鼠标进入,"src\\Aduio\\鼠标1.wav");
 	}
 	
 	public static FileInputStream loadStream(MusicName name) {

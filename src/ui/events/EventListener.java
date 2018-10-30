@@ -1,6 +1,4 @@
-package ui;
-
-import ui.events.Event;
+package ui.events;
 
 public interface EventListener{
 	public void actionPerformed(Event event);

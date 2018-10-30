@@ -5,10 +5,10 @@ import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
 
+import assets.MusicName;
 import ui.*;
 import ui.background.BackGroundImage;
 import main.GameClient;
-import sounds.GameAudio;
 
 public class Tortoise extends GameCreature 
 {
@@ -247,7 +247,7 @@ public class Tortoise extends GameCreature
 			}
 			
 			//打击音效
-			new GameAudio("打击").start();
+			panel.getSoundManager().playSound(MusicName.打击);
 			
 		}
 		else if(touchhero==Action.LTOUCH)

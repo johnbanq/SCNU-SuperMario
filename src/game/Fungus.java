@@ -9,9 +9,9 @@ import java.util.Map;
 
 import assets.ImageLoader;
 import assets.ImageName;
+import assets.MusicName;
 import ui.*;
 import main.GameClient;
-import sounds.GameAudio;
 
 
 public class Fungus extends GameCreature 
@@ -144,7 +144,7 @@ public class Fungus extends GameCreature
 			hit=true;
 			
 			//打击音效
-			new GameAudio("打击").start();
+			panel.getSoundManager().playSound(MusicName.打击);
 		}
 		else if(touchhero==Action.LTOUCH)
 		{

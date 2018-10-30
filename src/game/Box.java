@@ -6,10 +6,10 @@ import java.util.Map;
 
 import assets.ImageLoader;
 import assets.ImageName;
+import assets.MusicName;
 import ui.*;
 import util.FrameSequence;
 import main.GameClient;
-import sounds.GameAudio;
 
 
 public class Box extends GameObject 
@@ -78,7 +78,7 @@ public class Box extends GameObject
 			mush = new Mushroom(getPosX()+obj_w/5,getPosY()-25,this,panel);
 			
 			//撞箱子音效
-			new GameAudio("撞箱子").start();
+			panel.getSoundManager().playSound(MusicName.撞箱子);
 		}
 		else if(touch==Action.UNTOUCH)
 		{

@@ -10,12 +10,15 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import sounds.GameAudio;
+import assets.MusicName;
+import sounds.SoundManager;
 import ui.background.BackGroundImage;
 
 @SuppressWarnings("serial")
 public class GameButton extends JButton {
 	private ImageIcon imgicon = null, rollicon = null, pressedicon = null;
+	private SoundManager sound_mgr;
+	
 	
 	private static Toolkit tk = Toolkit.getDefaultToolkit();
 	private static Map<String, Image> obj_imgs = new HashMap<String, Image>();
@@ -40,7 +43,8 @@ public class GameButton extends JButton {
 		obj_imgs.put("BS3", imgs[8]);
 	}
 
-	GameButton(String name) {
+	GameButton(String name,SoundManager sound_mgr) {
+		this.sound_mgr = sound_mgr;
 		// 设置个状态显示的图片
 		if (name == "EXIT") {
 			imgicon = new ImageIcon(obj_imgs.get("BE1"));
@@ -62,7 +66,7 @@ public class GameButton extends JButton {
 		//so we have click sound
 		super.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new GameAudio("点击").start();
+				sound_mgr.playSound(MusicName.点击);
 				System.out.println("点击！");
 			}
 		});
