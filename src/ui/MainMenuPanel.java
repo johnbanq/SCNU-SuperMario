@@ -84,7 +84,8 @@ public class MainMenuPanel extends AbstractGamePanel{
 	
 	public void paint(Graphics g) {
 		bg.render(g, null);
-		bg_label.paintAll(g);
+		if(bg_label!=null)
+			bg_label.paintAll(g);
 	}
 
 }

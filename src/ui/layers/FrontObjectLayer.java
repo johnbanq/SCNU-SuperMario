@@ -37,7 +37,7 @@ public class FrontObjectLayer {
 			objs.add(new Fungus(150, 300, MoveDirection.RIGHT, panel));
 			// 一号食人花
 			objs.add(new Box(250, 450, panel));
-			// objs.add(new Chomper(250,420,"Grass",gc));
+			objs.add(new Chomper(250,420,"Grass",panel));
 			// 一号地面
 			objs.add(new Grass(300, 380, 3, 2, panel));
 			objs.add(new Grass(-100, 430, 20, 6, panel));
