@@ -16,7 +16,7 @@ import ui.events.*;
 public class GameClient extends JFrame
 {
 	public enum ClientState{
-		MAIN_MENU,GAME,GAME_OVER,GAME_WIN
+		MAIN_MENU,INTRO,GAME,GAME_OVER,EPILOGUE,GAME_WIN
 	}
 	
 	public final static int window_width = 800, window_height = 600;
@@ -103,6 +103,18 @@ public class GameClient extends JFrame
 			});
 			sound_mgr.playBGM(MusicName.”Œœ∑BGM);
 			break;
+		case INTRO:
+			sound_mgr.stopBGM();
+			cur_panel = new IntroPanel(sound_mgr);
+			cur_panel.addEventListener(new EventListener() {
+				public void actionPerformed(Event event) {
+					//listen for press any key event
+					if(event instanceof GameStartEvent) {
+						switch_to_state(ClientState.GAME);
+					}
+				}
+			});
+			break;
 		case GAME_OVER:
 			cur_panel = new GameOverPanel(sound_mgr);
 			cur_panel.addEventListener(new EventListener() {
@@ -127,7 +139,8 @@ public class GameClient extends JFrame
 			cur_panel.addEventListener(new EventListener() {
 				public void actionPerformed(Event event) {
 					//listen for game start event
-					switch_to_state(ClientState.GAME);
+					if(event instanceof IntroStartEvent)
+						switch_to_state(ClientState.INTRO);
 				}
 			});
 			sound_mgr.playBGM(MusicName.≤Àµ•BGM);

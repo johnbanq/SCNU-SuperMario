@@ -17,6 +17,7 @@ import main.GameClient;
 import sounds.SoundManager;
 import ui.background.BackGroundImage;
 import ui.events.GameStartEvent;
+import ui.events.IntroStartEvent;
 import ui.layers.BackGroundLayer;
 
 @SuppressWarnings("serial")
@@ -59,7 +60,7 @@ public class MainMenuPanel extends AbstractGamePanel{
 		play_btn.setContentAreaFilled(false);
 		play_btn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent event) {
-				tellEvent(new GameStartEvent());
+				tellEvent(new IntroStartEvent());
 			}
 		});
 		bg_label.add(play_btn);
