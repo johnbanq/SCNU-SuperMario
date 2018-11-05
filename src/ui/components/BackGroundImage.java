@@ -19,7 +19,8 @@ public class BackGroundImage {
 	private BackGroundImage follow_bg = null;
 
 	static {
-		Image[] imgs = new Image[] { tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/forest1.png")),
+		Image[] imgs = new Image[] { 
+				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/background1.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/background_cloud.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/forest3.2.png")),
 				tk.getImage(BackGroundImage.class.getClassLoader().getResource("Img/menu1.png")),
@@ -55,7 +56,7 @@ public class BackGroundImage {
 	public void move(Hero player) {
 		if(img_name == "CLOUD" || img_name == "FOREST") {
 			if (player.x + player.speed_x > Hero.LIM_X2 && player.finish == false) {
-				x -= player.speed_x / 4;
+				//x -= player.speed_x / 4;
 			}	
 			if (img_name == "CLOUD") {
 				x -= x_speed;
