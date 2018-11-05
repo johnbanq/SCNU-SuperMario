@@ -2,6 +2,7 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -186,9 +187,9 @@ public class Tortoise extends GameCreature
 		super.touchWithHero(hero);
 		if(draw==false||hero.live==false) return;
 //		System.out.println(hero.getNextRectangle()+" "+this.getRectangle());
-		if(hero.getNextRectangle().intersects(getTotalRectangle())
-			||hero.getARectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
-			||hero.getARectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
+		if(hero.getNextFrameRectangle().intersects(getTotalRectangle())
+			||new Rectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
+			||new Rectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
 				)
 		{
 			if(hero.y+hero.hero_h<=getPosY())

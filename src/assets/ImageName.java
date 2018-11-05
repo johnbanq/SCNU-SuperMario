@@ -6,5 +6,6 @@ public enum ImageName {
 	FLOWER,
 	FUNGUS,
 	CHARACTER_PHOTO,
-	ICON
+	ICON,
+	BONUS
 }

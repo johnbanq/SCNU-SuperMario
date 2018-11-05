@@ -1,8 +1,12 @@
 package game;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.JLabel;
 
 import assets.ImageLoader;
 import assets.ImageName;
@@ -12,8 +16,12 @@ import util.FrameSequence;
 import main.GameClient;
 
 
-public class Box extends GameObject 
+public class BonusBox extends GameObject 
 {
+	private static String motto = "艰苦奋斗严谨治学求实创新为人师表";
+	private int motto_cnt = 0;
+	private GameLabel motto_label;
+	
 	private static Image[] imgs = ImageLoader.loadImage(tk,ImageName.BOX);
 	private FrameSequence frame_seq = new FrameSequence(
 			new Image[] {
@@ -30,15 +38,25 @@ public class Box extends GameObject
 	
 	protected static final int Y_SPE=10,G_ADD=3;
 	protected int yspe=0,in_y=0;
-	protected Mushroom mush = null;
-	
-	public Box(int x, int y, GamePanel gp) {
+
+	public BonusBox(int x, int y, GamePanel gp) {
 		super(x, y, gp);
 		in_y=y;
 		obj_w=30;
 		obj_h=30;
 		all_w=30;
 		all_h=30;
+		
+		motto_label = new GameLabel(getPosX()-25,getPosY()-85,gp);
+		JLabel label = motto_label.getLabel();
+		label.setVisible(true);
+		label.setBackground(Color.RED);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("微软雅黑", 0, 40));
+		label.setOpaque(false);
+		label.setBounds(0,0,100,100);
+		gp.getObjectLayer().objs.add(motto_label);
+		
 	}
 
 	public void draw(Graphics g)
@@ -46,8 +64,6 @@ public class Box extends GameObject
 		super.draw(g);
 		Image img = frame_seq.currentFrameAndNext();
 		g.drawImage(img, getPosX(), getPosY(), null);
-		if(mush!=null)
-			mush.draw(g);
 	}
 	
 	protected void touchWithHero(Hero hero) {
@@ -74,11 +90,10 @@ public class Box extends GameObject
 		if(touch==Action.BUNT)
 		{
 			yspe=-Y_SPE;
-			if(mush==null)
-			mush = new Mushroom(getPosX()+obj_w/5,getPosY()-25,this,panel);
 			
 			//撞箱子音效
 			panel.getSoundManager().playSound(MusicName.撞箱子);
+			doMotto();
 		}
 		else if(touch==Action.UNTOUCH)
 		{
@@ -95,6 +110,23 @@ public class Box extends GameObject
 		}
 		setPosY(getPosY() + yspe);
 
+	}
+	
+	private void doMotto() {
+		if(motto_cnt == motto.length()) {
+			motto_label.getLabel().setVisible(false);
+			panel.showBonus();
+			motto_cnt++;
+			return;
+		}
+		if(motto_cnt<motto.length()) {
+			if(motto_cnt == 0) {
+				motto_label.getLabel().setVisible(true);
+			}
+			StringBuffer str = new StringBuffer();
+			str.append(motto.charAt(motto_cnt++));
+			motto_label.getLabel().setText(str.toString());	
+		}
 	}
 
 }

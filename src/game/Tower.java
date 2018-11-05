@@ -45,7 +45,7 @@ public class Tower extends GameObject
 
 	protected void touchWithHero(Hero hero) {
 		super.touchWithHero(hero);
-		if(getTotalRectangle().intersects(hero.getRectangle())==true)
+		if(getTotalRectangle().intersects(hero.getThisFrameRectangle())==true)
 		{
 			hero.finish();
 			touchhero=Action.BUNT;

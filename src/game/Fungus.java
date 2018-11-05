@@ -107,9 +107,9 @@ public class Fungus extends GameCreature
 	public void touchWithHero(Hero hero) {
 		super.touchWithHero(hero);
 		if(draw==false||hero.live==false) return;
-		if(hero.getNextRectangle().intersects(getNextRectangle())
-			||hero.getARectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
-			||hero.getARectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
+		if(hero.getNextFrameRectangle().intersects(getNextRectangle())
+			||new Rectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
+			||new Rectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getNextRectangle())
 				)
 		{
 			if(hero.y+hero.hero_h<=getPosY())

@@ -45,11 +45,16 @@ public class ImageLoader {
 				"Img/ùŒ◊”.png"
 				}
 		);
+		
 		paths.put(ImageName.ICON,new String[]{
 				"Img/icon.png"
 				}
 		);
 		
+		paths.put(ImageName.BONUS,new String[]{
+				"Img/bonus.jpg"
+				}
+		);		
 	}
 	
 	public static Image[] loadImage(ImageName name) {

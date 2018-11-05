@@ -20,16 +20,14 @@ public class Hero
 	public int hero_w=25,hero_h=40;
 	public int x,y,x1,y1,x2,y2,hasrun_x=0;
 	public final static int LIM_X1=0,LIM_X2=550;
-	public boolean march,can_j=true,finish=false;
+	public boolean march,can_jump=true,finish=false,live = true;
 	protected boolean b_l,b_u,b_r,b_d;
-	public boolean live = true;
 	public Action act = Action.UNSTAND;
 	public Action touch = Action.STAND;
 	public Action last_t = Action.UNSTAND;
-	protected MoveDirection add_dir=MoveDirection.STOP;
-	protected MoveDirection move_dir=MoveDirection.STOP;
-	protected MoveDirection face_dir=MoveDirection.RIGHT;
-	private List<GameObject> objs=null;
+	private MoveDirection accel_dir=MoveDirection.STOP;
+	private MoveDirection speed_dir=MoveDirection.STOP;
+	private MoveDirection face_dir=MoveDirection.RIGHT;
 	protected static Map<String,Image> hero_img = new HashMap<String,Image>();
 	public boolean big=false;
 	protected GamePanel panel=null;
@@ -44,16 +42,17 @@ public class Hero
 	public void draw(Graphics g)
 	{
 		move();
+		
 		Color c = g.getColor();
 		g.setColor(Color.black);
 		g.fillOval(x,y,5,5);
 		g.fillOval(x,(y+hero_h),5,5);
 		g.fillOval(x+hero_w,y,5,5);
 		g.setColor(c);
-		if(this.live==true)
+		
+		if(this.live)
 		{
 			this.setMarch();
-			setObjs(panel.getObjectLayer().objs);
 			touchWithObjs();
 		}
 	}
@@ -64,10 +63,6 @@ public class Hero
 		{
 		hasrun_x+=speed_x;
 		}
-	}
-
-	public void setObjs(List<GameObject> objs) {
-		this.objs = objs;
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -109,47 +104,47 @@ public class Hero
 	{
 		hasrun_x=0;
 		relive();
-		//System.out.println("big "+big+" march "+march);
 	}
 
 	protected void setDir()
 	{
-		if(speed_x>0) move_dir=MoveDirection.RIGHT;
-		if(speed_x<0) move_dir=MoveDirection.LEFT;
-		if(speed_x==0) move_dir=MoveDirection.STOP;
+		if(speed_x>0) setMoveDirection(MoveDirection.RIGHT);
+		if(speed_x<0) setMoveDirection(MoveDirection.LEFT);
+		if(speed_x==0) setMoveDirection(MoveDirection.STOP);
 	}
 	
 	protected void setMarch()
 	{
-		if(move_dir==add_dir) march=true;
+		if(getMoveDirection()==getAddDirection()) march=true;
 		else march=false;
 		if(finish==true) march=true;//完成任务时是走的状态
 	}
 	
 	protected void setFacedir()
 	{
-		if(add_dir!=MoveDirection.STOP)
-		face_dir=this.add_dir;
+		if(getAddDirection()!=MoveDirection.STOP)
+			setFaceDirection(this.getAddDirection());
 	}
 	
 	protected int getXAdd()
 	{
-		if(finish==true) return 0;
+		if(finish==true) 
+			return 0;
 		int add = 0;
 		if(b_l==false&&b_r==false) 
 		{
 			add=0;
-			add_dir=MoveDirection.STOP;
+			setAddDirection(MoveDirection.STOP);
 		}
 		else if(b_l==true) 
 		{
 			add=(-spe_add);
-			add_dir=MoveDirection.LEFT;
+			setAddDirection(MoveDirection.LEFT);
 		}
 		else if(b_r==true) 
 		{
 			add=spe_add;
-			add_dir=MoveDirection.RIGHT;
+			setAddDirection(MoveDirection.RIGHT);
 		}
 		return add;
 	}
@@ -160,8 +155,8 @@ public class Hero
 		int rub = 0;
 		if(speed_x!=0) 
 		{
-			if(move_dir==MoveDirection.RIGHT) rub=(-rub_add);
-			else if(move_dir==MoveDirection.LEFT) rub=(rub_add);
+			if(getMoveDirection()==MoveDirection.RIGHT) rub=(-rub_add);
+			else if(getMoveDirection()==MoveDirection.LEFT) rub=(rub_add);
 		}
 		if(touch==Action.LTOUCH||touch==Action.RTOUCH)
 		{
@@ -172,12 +167,12 @@ public class Hero
 	
 	protected void jump()
 	{
-		if(can_j&&act==Action.STAND)
+		if(can_jump&&act==Action.STAND)
 		{
 			speed_y-=y_add*1.3;
 			b_u=false;
 		}
-		else if(can_j==true&&act==Action.UNSTAND)
+		else if(can_jump==true&&act==Action.UNSTAND)
 		{	
 			speed_y=-y_add*1;
 			b_u=false;
@@ -185,7 +180,7 @@ public class Hero
 		if(speed_y<=-YSPE)
 		{
 			speed_y=-YSPE;
-			can_j=false;
+			can_jump=false;
 		}
 		j_time++;
 		act=Action.UNSTAND;
@@ -244,14 +239,14 @@ public class Hero
 	}
 	
 	private void yMove() {
-		if(b_u==true&&can_j==true&&j_time<j_lim)
+		if(b_u==true&&can_jump==true&&j_time<j_lim)
 		{
 			jump();
 			b_u=false;
 		}
 		else if (act==Action.STAND&&speed_y>0)
 		{
-			can_j=true;
+			can_jump=true;
 			j_time=0;
 			speed_y=1;
 		}
@@ -336,30 +331,28 @@ public class Hero
 		}
 	}
 
-	public Rectangle getRectangle()
+	public Rectangle getThisFrameRectangle()
 	{
 		return new Rectangle(x,y,hero_w,hero_h);
 	}
-	public Rectangle getARectangle(int x,int y,int w,int h)
-	{
-		return new Rectangle(x,y,w,h);
-	}
-	public Rectangle getNextRectangle()
+
+	public Rectangle getNextFrameRectangle()
 	{
 		return new Rectangle(x+speed_x,y+speed_y,hero_w,hero_h);
 	}
+	
 	protected void touchWithObjs() 
 	{
 		if(live==false) return;
 		GameObject obj1=null;
 		GameObject obj2=null;
+		List<GameObject> objs = panel.getObjectLayer().objs;
 		for(int i=0;i<objs.size();i++)
 		{
-			GameObject obj=null;
-			obj = objs.get(i);
+			GameObject obj=objs.get(i);
 			
-			if((x>obj.getPosX()&&x<obj.getPosX()+obj.all_w&&y>obj.getPosY()&&y<obj.getPosY()+obj.all_h)
-				||(x+hero_w>obj.getPosX()&&x+hero_w<obj.getPosX()+obj.all_w&&y>obj.getPosY()&&y<obj.getPosY()+obj.all_h))//穿越物体检测1
+			if((obj.getPosX()<x&&x<obj.getPosX()+obj.all_w && obj.getPosY()<y&&y<obj.getPosY()+obj.all_h)
+				||(obj.getPosX()<x+hero_w&&x+hero_w<obj.getPosX()+obj.all_w&&obj.getPosY()<y&&y<obj.getPosY()+obj.all_h))//穿越物体检测1
 			{
 				if(obj.getPosY()>=y-hero_h) 
 					{
@@ -379,7 +372,8 @@ public class Hero
 				act=Action.UNSTAND;
 				System.out.println("Hero穿越物体检测1");
 			}
-			if((obj.draw==true&&getNextRectangle().intersects(obj.getTotalRectangle())==true&&(obj!=obj1&&obj!=obj2))||obj.throughCheck(this))
+			
+			if((obj.draw==true&&getNextFrameRectangle().intersects(obj.getTotalRectangle())==true&&(obj!=obj1&&obj!=obj2))||obj.throughCheck(this))
 			{
 				if(obj.throughCheck(this))//穿越物体检测2
 				{
@@ -481,5 +475,29 @@ public class Hero
 			//System.out.println("没有物体即将碰撞 "+act+" "+touch+" x "+x+" y "+y);
 		}
 
+	}
+
+	public MoveDirection getAddDirection() {
+		return accel_dir;
+	}
+
+	public void setAddDirection(MoveDirection add_dir) {
+		this.accel_dir = add_dir;
+	}
+
+	public MoveDirection getMoveDirection() {
+		return speed_dir;
+	}
+
+	public void setMoveDirection(MoveDirection move_dir) {
+		this.speed_dir = move_dir;
+	}
+
+	protected MoveDirection getFaceDirection() {
+		return face_dir;
+	}
+
+	protected void setFaceDirection(MoveDirection face_dir) {
+		this.face_dir = face_dir;
 	}
 }

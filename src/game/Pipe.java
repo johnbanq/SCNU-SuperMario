@@ -75,7 +75,7 @@ public class Pipe extends GameObject
 	
 	protected void touchWithHero(Hero hero) {
 		super.touchWithHero(hero);
-		if(hero.getNextRectangle().intersects(this.getTotalRectangle()))
+		if(hero.getNextFrameRectangle().intersects(this.getTotalRectangle()))
 		{
 			if(hero.y<=getPosY()+all_h)
 			{

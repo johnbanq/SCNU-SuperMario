@@ -2,6 +2,7 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -162,9 +163,9 @@ public class Chomper extends GameCreature
 		{
 			yspe=-YSPE;
 		}
-		if(hero.getNextRectangle().intersects(getTotalRectangle())
-			||hero.getARectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getTotalRectangle())
-			||hero.getARectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getTotalRectangle())
+		if(hero.getNextFrameRectangle().intersects(getTotalRectangle())
+			||new Rectangle(hero.x+1, hero.y,hero.hero_w,hero.hero_h).intersects(getTotalRectangle())
+			||new Rectangle(hero.x-1,hero.y,hero.hero_w,hero.hero_h).intersects(getTotalRectangle())
 				)
 		{
 			if(hero.y+hero.hero_h==getPosY()||((hero.x>=getPosX()&&hero.x<=getPosX()+all_w)&&hero.y+hero.hero_h>=getPosY()&&ground=="Pipe"))

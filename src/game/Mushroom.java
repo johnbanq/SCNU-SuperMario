@@ -141,7 +141,7 @@ public class Mushroom extends GameCreature
 	{
 		super.touchWithHero(hero);
 		if(draw==false) return;
-		if(hero.getNextRectangle().intersects(this.getTotalRectangle()))
+		if(hero.getNextFrameRectangle().intersects(this.getTotalRectangle()))
 		{
 			touch=Action.BUNT;
 		}
