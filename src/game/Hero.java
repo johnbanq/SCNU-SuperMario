@@ -476,6 +476,12 @@ public class Hero
 		}
 
 	}
+	
+	public void finish1()
+	{
+			//过关音效
+			panel.getSoundManager().playSound(MusicName.撞箱子);
+	}
 
 	public MoveDirection getAddDirection() {
 		return accel_dir;

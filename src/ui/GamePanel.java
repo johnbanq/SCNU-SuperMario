@@ -13,7 +13,10 @@ import javax.swing.JLabel;
 
 import assets.ImageLoader;
 import assets.ImageName;
+import game.BonusBox;
+import game.GameObject;
 import game.Mario;
+import game.Tower4;
 import main.GameClient;
 import sounds.SoundManager;
 import ui.components.BlinkingLabel;
@@ -95,6 +98,30 @@ public class GamePanel extends AbstractGamePanel {
 			public void keyPressed(KeyEvent e) {
 				if(player1!=null)//maybe we can do better?
 					player1.keyPressed(e);
+				
+				//the arrow down key bonus
+				if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+					//find the door
+					GameObject door_obj = null;
+					for(GameObject obj : img_layer.objs) {
+						if(obj instanceof Tower4) {
+							door_obj = obj;
+							break;
+						}
+					}
+					//if it intersects
+					if(player1.getThisFrameRectangle().intersects(door_obj.getTotalRectangle())) {
+						BonusBox bonus_obj = null;
+						for(GameObject obj : obj_layer.objs) {
+							if(obj instanceof BonusBox) {
+								bonus_obj = (BonusBox)obj;
+								break;
+							}
+						}
+						System.out.println("ENABLE!");
+						bonus_obj.setEnabled(true);
+					}
+				}
 			}
 
 			public void keyReleased(KeyEvent e) {

@@ -18,6 +18,8 @@ import main.GameClient;
 
 public class BonusBox extends GameObject 
 {
+	private boolean enabled = false;
+	
 	private static String motto = "艰苦奋斗严谨治学求实创新为人师表";
 	private int motto_cnt = 0;
 	private GameLabel motto_label;
@@ -51,7 +53,7 @@ public class BonusBox extends GameObject
 		JLabel label = motto_label.getLabel();
 		label.setVisible(true);
 		label.setBackground(Color.RED);
-		label.setForeground(Color.WHITE);
+		label.setForeground(Color.BLUE);
 		label.setFont(new Font("微软雅黑", 0, 40));
 		label.setOpaque(false);
 		label.setBounds(0,0,100,100);
@@ -62,8 +64,10 @@ public class BonusBox extends GameObject
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		Image img = frame_seq.currentFrameAndNext();
-		g.drawImage(img, getPosX(), getPosY(), null);
+		if(enabled) {
+			Image img = frame_seq.currentFrameAndNext();
+			g.drawImage(img, getPosX(), getPosY(), null);	
+		}
 	}
 	
 	protected void touchWithHero(Hero hero) {
@@ -127,6 +131,17 @@ public class BonusBox extends GameObject
 			str.append(motto.charAt(motto_cnt++));
 			motto_label.getLabel().setText(str.toString());	
 		}
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean v) {
+		if(v) {
+			this.available = true;
+		}
+		this.enabled = v;
 	}
 
 }

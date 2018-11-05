@@ -53,7 +53,6 @@ public class Tower4 extends GameObject
 			a++;
 			}
 			touchhero=Action.BUNT;
-			System.out.println("Tower touch hero!");
 			
 		}
 		doAction();

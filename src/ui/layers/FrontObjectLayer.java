@@ -33,7 +33,7 @@ public class FrontObjectLayer {
 
 	protected void makeObj() {
 		if (num == 1) {
-			objs.add(new BonusBox(150, 300,panel));
+			objs.add(new BonusBox(1558, 220,panel));
 			// 一号蘑菇怪
 			objs.add(new Fungus(150, 300, MoveDirection.RIGHT, panel));
 			// 一号食人花
