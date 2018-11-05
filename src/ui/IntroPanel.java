@@ -112,7 +112,7 @@ public class IntroPanel extends AbstractGamePanel {
 			shown_buf.append(intro_text[shown_row_count++]);
 			shown_buf.append("<br>");
 			// display delay
-			tick_to_skip = 40;
+			tick_to_skip = 20;
 		} else {// shown_row_count == intro_text.length fully displayed
 			guide_label.setVisible(true);
 			shown_row_count = -1;
