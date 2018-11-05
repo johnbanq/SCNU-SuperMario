@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import game.Hero;
 import main.GameClient;
-import ui.background.BackGroundImage;
+import ui.components.BackGroundImage;
 
 public class BackGroundLayer 
 {

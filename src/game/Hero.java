@@ -73,7 +73,6 @@ public class Hero
 	public void keyPressed(KeyEvent e) {
 		if(live==false||finish==true) return;
 		int key=e.getKeyCode();
-		System.out.println(key);
 		if(key==KeyEvent.VK_LEFT) b_l=true;
 		else if (key==KeyEvent.VK_UP) b_u=true;
 		else if (key==KeyEvent.VK_RIGHT) b_r=true;

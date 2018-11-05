@@ -7,7 +7,6 @@ import java.util.EnumMap;
 public class ImageLoader {
 	//a class to locate the bgm assets
 	private static EnumMap<ImageName,String[]> paths;
-	
 	static {
 		paths = new EnumMap<ImageName,String[]>(ImageName.class); 
 		
@@ -41,6 +40,20 @@ public class ImageLoader {
 				"Img/fungus3.png"
 				}
 		);
+		
+		paths.put(ImageName.CHARACTER_PHOTO,new String[]{
+				"Img/ùŒ◊”.png"
+				}
+		);
+		paths.put(ImageName.ICON,new String[]{
+				"Img/icon.png"
+				}
+		);
+		
+	}
+	
+	public static Image[] loadImage(ImageName name) {
+		return loadImage(Toolkit.getDefaultToolkit(),name);
 	}
 	
 	public static Image[] loadImage(Toolkit tk,ImageName name) {

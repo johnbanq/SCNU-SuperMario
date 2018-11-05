@@ -21,6 +21,7 @@ public class GameClient extends JFrame
 	
 	public final static int window_width = 800, window_height = 600;
 	private AbstractGamePanel cur_panel;
+	private GamePanel game_panel;
 	private Image buffer_img;
 	
 	SoundManager sound_mgr = new SoundManager();
@@ -90,13 +91,14 @@ public class GameClient extends JFrame
 		}
 		switch(state) {
 		case GAME:
-			cur_panel = new GamePanel(sound_mgr);
+			game_panel = new GamePanel(sound_mgr);
+			cur_panel = game_panel;
 			cur_panel.addEventListener(new EventListener() {
 				public void actionPerformed(Event event) {
 					if(event instanceof GameOverAndCanShowScreen) {
 						switch_to_state(ClientState.GAME_OVER);
-					}else if(event instanceof GameWonAndCanShowScreen) {
-						switch_to_state(ClientState.GAME_WIN);
+					}else if(event instanceof GameWonAndCanShowEpilogue) {
+						switch_to_state(ClientState.EPILOGUE);
 					}
 					sound_mgr.stopBGM();
 				}
@@ -126,7 +128,7 @@ public class GameClient extends JFrame
 			break;
 		case GAME_WIN:
 			cur_panel.addToGameClient(this);
-			cur_panel = new GameWinPanel(sound_mgr,cur_panel);
+			cur_panel = new GameWinPanel(sound_mgr,game_panel);
 			cur_panel.addEventListener(new EventListener() {
 				public void actionPerformed(Event event) {
 					//listen for game restart event
@@ -145,6 +147,16 @@ public class GameClient extends JFrame
 			});
 			sound_mgr.playBGM(MusicName.²Ëµ¥BGM);
 			break;
+		case EPILOGUE:
+			cur_panel = new EpiloguePanel(game_panel,sound_mgr);
+			cur_panel.addEventListener(new EventListener() {
+				public void actionPerformed(Event event) {
+					//listen for epilogue event
+					if(event instanceof GameWonAndCanShowScreen) {
+						switch_to_state(ClientState.GAME_WIN);	
+					}
+				}
+			});
 		default:
 			break;
 		}

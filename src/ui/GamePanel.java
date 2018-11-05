@@ -9,6 +9,7 @@ import game.Mario;
 import main.GameClient;
 import sounds.SoundManager;
 import ui.events.GameOverAndCanShowScreen;
+import ui.events.GameWonAndCanShowEpilogue;
 import ui.events.GameWonAndCanShowScreen;
 import ui.layers.BackGroundLayer;
 import ui.layers.BackObjectLayer;
@@ -23,6 +24,8 @@ public class GamePanel extends AbstractGamePanel {
 	private BackObjectLayer img_layer = new BackObjectLayer(1, this);
 	private BackGroundLayer bg_layer = new BackGroundLayer(BackGroundLayer.BackgroundType.GAME);
 	private KeyListener listener;
+	
+	private boolean should_event = true;
 	
 	
 	public GamePanel(SoundManager sound_mgr) {
@@ -57,11 +60,14 @@ public class GamePanel extends AbstractGamePanel {
 		img_layer.draw(g);
 		obj_layer.draw(g);
 		player1.draw(g);
-		
-		if(player1.live == false && player1.y >= 610) {
-			tellEvent(new GameOverAndCanShowScreen());
-		}else if(player1.finish == true){
-			tellEvent(new GameWonAndCanShowScreen());
+		if(should_event) {
+			if(player1.live == false && player1.y >= 610) {
+				should_event = false;
+				tellEvent(new GameOverAndCanShowScreen());
+			}else if(player1.finish == true){
+				should_event = false;
+				tellEvent(new GameWonAndCanShowEpilogue());
+			}
 		}
 	}
 

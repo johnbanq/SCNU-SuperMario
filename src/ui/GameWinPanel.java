@@ -19,7 +19,8 @@ import javax.swing.JPanel;
 import assets.MusicName;
 import main.GameClient;
 import sounds.SoundManager;
-import ui.background.BackGroundImage;
+import ui.components.BackGroundImage;
+import ui.components.GameButton;
 import ui.events.GameRestartEvent;
 import ui.layers.BackGroundLayer;
 
@@ -38,7 +39,6 @@ public class GameWinPanel extends AbstractGamePanel {
 	public void removeFromGameClient(GameClient gc) {
 		gc.remove(bg_label);
 		bg_label.setVisible(false);
-	
 	}
 	
 	public void addToGameClient(GameClient gc) {

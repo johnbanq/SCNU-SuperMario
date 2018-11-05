@@ -8,7 +8,7 @@ import java.util.Map;
 
 import assets.MusicName;
 import ui.*;
-import ui.background.BackGroundImage;
+import ui.components.BackGroundImage;
 import main.GameClient;
 
 public class Mushroom extends GameCreature

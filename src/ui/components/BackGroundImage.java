@@ -1,4 +1,4 @@
-package ui.background;
+package ui.components;
 
 import java.awt.Graphics;
 import java.awt.Image;

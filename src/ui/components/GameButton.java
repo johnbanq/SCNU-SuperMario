@@ -1,4 +1,4 @@
-package ui;
+package ui.components;
 
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -12,7 +12,6 @@ import javax.swing.JButton;
 
 import assets.MusicName;
 import sounds.SoundManager;
-import ui.background.BackGroundImage;
 
 @SuppressWarnings("serial")
 public class GameButton extends JButton {
@@ -43,7 +42,7 @@ public class GameButton extends JButton {
 		obj_imgs.put("BS3", imgs[8]);
 	}
 
-	GameButton(String name,SoundManager sound_mgr) {
+	public GameButton(String name,SoundManager sound_mgr) {
 		this.sound_mgr = sound_mgr;
 		// 设置个状态显示的图片
 		if (name == "EXIT") {

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import main.GameClient;
 import sounds.SoundManager;
+import ui.components.GameButton;
 import ui.events.GameRestartEvent;
 import ui.layers.BackGroundLayer;
 

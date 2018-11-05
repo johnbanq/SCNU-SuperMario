@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ui.*;
-import ui.background.BackGroundImage;
+import ui.components.BackGroundImage;
 import main.GameClient;
 
 public class Tower extends GameObject 

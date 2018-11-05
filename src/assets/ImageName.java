@@ -4,5 +4,7 @@ public enum ImageName {
 	BOX,
 	BRICK,
 	FLOWER,
-	FUNGUS
+	FUNGUS,
+	CHARACTER_PHOTO,
+	ICON
 }

@@ -7,10 +7,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import assets.ImageLoader;
+import assets.ImageName;
 import main.GameClient;
 import sounds.SoundManager;
+import ui.components.BlinkingLabel;
 import ui.events.GameStartEvent;
 
 @SuppressWarnings("serial")
@@ -20,7 +24,7 @@ public class IntroPanel extends AbstractGamePanel {
 		super(sound_mgr);
 	}
 
-	private JLabel bg_label;
+	private JLabel bg_label,icon_label;
 	private JLabel intro_label;
 	private BlinkingLabel guide_label;
 	private KeyListener listener;
@@ -59,11 +63,17 @@ public class IntroPanel extends AbstractGamePanel {
 		guide_label = new BlinkingLabel();
 		guide_label.setText(guide_text);
 		guide_label.setForeground(Color.WHITE);
-		guide_label.setFont(new Font("Î¢ÈíÑÅºÚ", 1, 15));
+		guide_label.setFont(new Font("Î¢ÈíÑÅºÚ", 1, 16));
 		guide_label.setBounds(600, 500, 200, 50);
 		guide_label.setOpaque(false);
 		guide_label.setVisible(false);
 		bg_label.add(guide_label);
+		
+		icon_label = new JLabel();
+		icon_label.setBounds(225,40, 600, 600);
+		icon_label.setOpaque(false);
+		icon_label.setIcon(new ImageIcon(ImageLoader.loadImage(ImageName.ICON)[0]));
+		bg_label.add(icon_label);
 
 		// the press any key listener
 		if (listener == null) {
@@ -79,8 +89,6 @@ public class IntroPanel extends AbstractGamePanel {
 	}
 
 	public synchronized void paint(Graphics g) {
-		// HACK:to make scrolling effect and lighting effect
-		// frame rate assumed to be 50Hz according to framerate in PaintThread
 
 		// make the intro type
 		tick_intro_text();
@@ -89,6 +97,9 @@ public class IntroPanel extends AbstractGamePanel {
 	}
 
 	private void tick_intro_text() {
+		// HACK:to make scrolling effect and lighting effect
+		// frame rate assumed to be 50Hz according to framerate in PaintThread
+		
 		// make the intro type
 		if (tick_to_skip != 0) {
 			tick_to_skip--;
